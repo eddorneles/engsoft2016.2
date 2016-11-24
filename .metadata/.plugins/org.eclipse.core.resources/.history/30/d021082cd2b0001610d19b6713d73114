@@ -1,0 +1,10 @@
+package dao;
+
+import org.hibernate.Session;
+
+public class DAO {
+
+	public Session getSession(){
+		
+	}
+}

@@ -1,0 +1,12 @@
+package mbean;
+
+import java.util.Collection;
+
+import dao.AlimentoDAO;
+import dominio.Alimento;
+
+public class AlimentoMBean {
+
+	Collection<Alimento> alimentos = null;
+	
+}

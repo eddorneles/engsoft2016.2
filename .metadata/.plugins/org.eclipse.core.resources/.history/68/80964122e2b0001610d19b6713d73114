@@ -1,0 +1,13 @@
+package maquiaDeAlimentos;
+
+import mbean.AlimentoMBean;
+
+public class Main {
+
+	public static void main(String[] args){
+		
+		AlimentoMBean alimentosBean = new AlimentoMBean();
+		
+		Collection<T> alimentos = alimentosBean.findAllAlimentosValidosMaquina(1);
+	}
+}
