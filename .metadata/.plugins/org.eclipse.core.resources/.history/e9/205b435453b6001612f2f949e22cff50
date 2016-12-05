@@ -1,0 +1,22 @@
+package dao;
+
+import java.util.List;
+
+
+import org.hibernate.Criteria;
+import org.hibernate.sql.JoinType;
+
+import dominio.Maquina;
+
+
+public class MaquinaDAO extends DAO{
+
+	
+	public List<Maquina> findAllMaquinasWithProduction(){
+		
+		Criteria c = getSession().createCriteria(Maquina.class);
+		
+		c.createAlias("id", "Alimento", JoinType.INNER_JOIN);
+		return c.list();
+	}
+}

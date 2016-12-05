@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="CommitDialog.authorValues">
+		<item value="Mourão &lt;antonio.sobrinho93@gmail.com&gt;"/>
+	</list>
+	<list key="CommitDialog.committerValues">
+		<item value="Mourão &lt;antonio.sobrinho93@gmail.com&gt;"/>
+	</list>
+	<section name="org.eclipse.egit.ui.internal.push.PushResultDialog.dialogBounds">
+		<item value="652" key="DIALOG_WIDTH"/>
+		<item value="1|Noto Sans|9.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
+		<item value="446" key="DIALOG_HEIGHT"/>
+		<item value="358" key="DIALOG_X_ORIGIN"/>
+		<item value="75" key="DIALOG_Y_ORIGIN"/>
+		<list key="sashWeights">
+			<item value="600"/>
+			<item value="400"/>
+		</list>
+	</section>
+	<section name="org.eclipse.egit.ui.internal.pull.PullResultDialog.dialogBounds">
+		<item value="534" key="DIALOG_X_ORIGIN"/>
+		<item value="250" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="GitCommitMessageComponent">
+		<list key="/home/mourao/Documentos/Computacao/Eng_2/Codigo/engsoft2016.2/.git">
+			<item value="false"/>
+			<item value="Mourão &lt;antonio.sobrinho93@gmail.com&gt;"/>
+			<item value="&#x0A;&#x0A;Change-Id: I0000000000000000000000000000000000000000&#x0A;"/>
+			<item value="Mourão &lt;antonio.sobrinho93@gmail.com&gt;"/>
+			<item value="5f50e8923aae4444c6f882c0465c7b0d3769abd9"/>
+		</list>
+	</section>
+	<section name="org.eclipse.egit.ui.internal.staging.StagingView">
+		<item value="500,500" key="STAGING_SASH_FORM_WEIGHT"/>
+		<item value="true" key="sortItemState"/>
+		<item value="500,500" key="HORIZONTAL_SASH_FORM_WEIGHT"/>
+	</section>
+</section>
