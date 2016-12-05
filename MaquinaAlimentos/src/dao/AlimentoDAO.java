@@ -1,6 +1,6 @@
 package dao;
 
-import java.util.Collection;
+import java.util.List;
 
 import dominio.Alimento;
 
@@ -9,17 +9,18 @@ import org.hibernate.criterion.Restrictions;
 
 public class AlimentoDAO extends DAO {
 
-	public Collection<Alimento> findAllAlimentosValidos(int idMaquina){
+	public List<Alimento> findAllAlimentosValidos(int idMaquina){
 		
 		Criteria c = getSession().createCriteria(Alimento.class);
 		
-		c.add(Restrictions.ilike("id_maquina", idMaquina));
-		
+		c.add(Restrictions.ilike("id", idMaquina));
+		 
 		try{
-			return (Collection<Alimento>) c.list();	
+			return c.list();
 		}
 		finally{
-			closeSession();
+			getSession().close();
 		}
+			
 	}
 }
