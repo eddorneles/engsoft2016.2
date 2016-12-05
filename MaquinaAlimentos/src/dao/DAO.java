@@ -20,4 +20,7 @@ public class DAO {
 		return session;
 	}
 	
+	protected void closeSession(){
+		sessionFactory.close();
+	}
 }

@@ -1,7 +1,0 @@
-package dominio;
-
-
-@Table(name="alimento")
-public class Alimento {
-
-}

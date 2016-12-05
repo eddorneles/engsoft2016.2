@@ -1,6 +1,6 @@
 package mbean;
 
-import java.util.Collection;
+import java.util.List;
 
 import dao.AlimentoDAO;
 import dominio.Alimento;
@@ -8,9 +8,9 @@ import dominio.Alimento;
 
 public class AlimentoMBean {
 
-	Collection<Alimento> alimentos = null;
+	private List<Alimento> alimentos = null;
 	
-	public Collection<Alimento> findAllAlimentosValidosMaquina(int idMaquina){
+	public List<Alimento> findAllAlimentosValidosMaquina(int idMaquina){
 		
 		AlimentoDAO dao = new AlimentoDAO();
 		

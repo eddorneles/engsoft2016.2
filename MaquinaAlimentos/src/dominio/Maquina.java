@@ -10,9 +10,10 @@ import javax.persistence.Id;
 public class Maquina {
 
 	@Id
+	@Column(name="id_maquina")
 	private int id;
 	
-	@Column(name="ciquenta_centavo")
+	@Column(name="cinquenta_centavo")
 	private int cinCent;
 	
 	@Column(name="um_real")

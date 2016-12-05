@@ -13,3 +13,8 @@
 1479988984872	Rename package 'conf'
 1479989080488	Rename type 'COnfiguracaoHibernate'
 1479989287813	Rename type 'AlimentoMaquina'
+1480013094055	Delete element
+1480013483676	Delete element
+1480013719951	Delete element
+1480114182626	Delete element
+1480119214726	Infer generic type arguments

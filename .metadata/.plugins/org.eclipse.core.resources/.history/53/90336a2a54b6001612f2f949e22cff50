@@ -1,0 +1,31 @@
+package dao;
+
+import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+
+import dominio.Alimento;
+
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl;
+
+public class AlimentoDAO extends DAO {
+
+	public List<Alimento> findAllAlimentosValidos(int idMaquina){
+		
+		
+		CriteriaBuilder cb;
+		Criteria c = getSession().createCriteria(Alimento.class);
+		
+		c.add(Restrictions.ilike("id", idMaquina));
+		 
+		try{
+			return c.list();
+		}
+		finally{
+			getSession().close();
+		}
+			
+	}
+}

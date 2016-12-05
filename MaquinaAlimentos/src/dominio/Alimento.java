@@ -22,10 +22,12 @@ public class Alimento {
 	@JoinColumn(name="id_tipo_alimento")
 	private TipoAlimento tipoAlimento;
 	
+	
 	@ManyToOne
 	@JoinColumn(name="id_maquina")
 	private Maquina maquina;
 	
+
 	@Column(name="data_cadastro")
 	private Date dataCadastro;
 	
@@ -47,13 +49,7 @@ public class Alimento {
 		this.tipoAlimento = tipoAlimento;
 	}
 
-	public Maquina getMaquina() {
-		return maquina;
-	}
 
-	public void setMaquina(Maquina maquina) {
-		this.maquina = maquina;
-	}
 
 	public Date getDataCadastro() {
 		return dataCadastro;
@@ -70,4 +66,13 @@ public class Alimento {
 	public void setBandeja(int bandeja) {
 		this.bandeja = bandeja;
 	}
+	
+	public Maquina getMaquina() {
+		return maquina;
+	}
+
+	public void setMaquina(Maquina maquina) {
+		this.maquina = maquina;
+	}
+
 }

@@ -10,7 +10,7 @@ import javax.persistence.Id;
 public class TipoAlimento {
 
 	@Id
-	private Integer id;
+	private int id;
 	
 	private String nome;
 	
@@ -19,7 +19,7 @@ public class TipoAlimento {
 	
 	private double preco;
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
