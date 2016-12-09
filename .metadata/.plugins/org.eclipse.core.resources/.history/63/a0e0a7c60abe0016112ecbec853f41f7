@@ -1,0 +1,19 @@
+package dominio;
+
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="operador_maquina")
+public class OperadorMaquina {
+
+	@OneToOne
+	@JoinColumn(name="id_operador")
+	private Operador operador;
+	
+	@OneToOne
+	@JoinColumn(name="id_maquina")
+	private Maquina maquina;
+}
