@@ -14,7 +14,7 @@ public class AlimentoMBean {
 		
 		AlimentoDAO dao = new AlimentoDAO();
 		
-		alimentos = dao.findAllAlimentosValidos(idMaquina);
+		alimentos = dao.findAllAlimentosValidosMaquina(idMaquina);
 		
 		return alimentos;
 	}
