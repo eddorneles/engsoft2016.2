@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 public class Alimento {
 
 	@Id
+	@Column(name="id_alimento")
 	private int id;
 	
 	@ManyToOne

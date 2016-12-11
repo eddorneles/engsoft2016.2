@@ -1,0 +1,12 @@
+package dominio;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="alimento")
+public class Operador {
+
+	@Id
+	
+}

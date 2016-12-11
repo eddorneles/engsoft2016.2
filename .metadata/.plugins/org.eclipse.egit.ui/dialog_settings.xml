@@ -25,9 +25,9 @@
 		<list key="/home/mourao/Documentos/Computacao/Eng_2/Codigo/engsoft2016.2/.git">
 			<item value="false"/>
 			<item value="Mourão &lt;antonio.sobrinho93@gmail.com&gt;"/>
-			<item value="&#x0A;&#x0A;Change-Id: I0000000000000000000000000000000000000000&#x0A;"/>
+			<item value="# WARNING: head commit changed in the meantime&#x0A;&#x0A;&#x0A;&#x0A;Change-Id: I0000000000000000000000000000000000000000&#x0A;"/>
 			<item value="Mourão &lt;antonio.sobrinho93@gmail.com&gt;"/>
-			<item value="5f50e8923aae4444c6f882c0465c7b0d3769abd9"/>
+			<item value="5e2239e956169f6f647da362f39a4c163a7e0505"/>
 		</list>
 	</section>
 	<section name="org.eclipse.egit.ui.internal.staging.StagingView">
