@@ -1,8 +1,0 @@
-Ideias interface gráfica
-	MÓDULO USUÁRIO
-	-Principal: Painel de escolha de produtos
-		-Painel de pagamento
-	
-
-	MÓDULO MANUTENÇÃO
-
