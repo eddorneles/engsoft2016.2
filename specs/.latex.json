@@ -1,0 +1,11 @@
+{
+  "projectPath": "/home/ed-dorneles/Estudo/Computacao/Disciplinas/ES2/Trabalho/engsoft2016.2/specs",
+  "title": "LaTeX-Plus Project",
+  "root": "userStories.tex",
+  "program": "pdflatex",
+  "latexmkOptions": "-bibtex -pdf -shell-escape",
+  "output": "files",
+  "openOutput": "false",
+  "postAction": "link",
+  "postPath": ""
+}
