@@ -1,4 +1,4 @@
-package view.operador;
+package grafico.operador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,7 +20,6 @@ public class GerenciarCash extends JFrame {
 	private JPanel contentPane;
 	private OperadorMaquina operadorMaquina;
 	private Maquina maquina;
-	private MaquinaDAO maquinaDAO;
 	private JTextField qtdeCinCent;
 	private JTextField qtdeUmReal;
 	private JTextField qtdeDoisReal;
@@ -30,6 +29,7 @@ public class GerenciarCash extends JFrame {
 	private JLabel lblSucesso;
 	private JButton btnVoltar;
 	private JPanel panel;
+	private JButton voltarTelaAnterior;
 
 	/**
 	 * Launch the application.
@@ -38,6 +38,7 @@ public class GerenciarCash extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
 					OperadorCash frame = new OperadorCash();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -51,8 +52,10 @@ public class GerenciarCash extends JFrame {
 	 * Create the frame.
 	 */
 	public GerenciarCash(OperadorMaquina opMaq) {
+		setLocationByPlatform(true);
 		//substituir linha abaixo por 'this.maquina = opMaq.getMaquina()'
-		this.maquina = new Maquina();
+		//this.maquina = new Maquina();
+		this.maquina = opMaq.getMaquina();
 		
 		//substituir linha abaixo por 'this.operadorMaquina = opMaq'
 		this.operadorMaquina = opMaq;
@@ -69,53 +72,126 @@ public class GerenciarCash extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel label = new JLabel("R$ 0,50");
-		label.setBounds(22, 58, 44, 16);
+		label.setBounds(22, 58, 65, 16);
 		panel.add(label);
 		
 		JLabel label_1 = new JLabel("R$ 1,00");
-		label_1.setBounds(22, 112, 44, 16);
+		label_1.setBounds(22, 112, 65, 16);
 		panel.add(label_1);
 		
 		JLabel label_2 = new JLabel("R$ 2,00");
-		label_2.setBounds(22, 167, 44, 16);
+		label_2.setBounds(22, 167, 65, 16);
 		panel.add(label_2);
 		
 		JLabel label_3 = new JLabel("R$ 5,00");
-		label_3.setBounds(207, 83, 44, 16);
+		label_3.setBounds(229, 83, 65, 16);
 		panel.add(label_3);
 		
 		JLabel label_4 = new JLabel("R$ 10,00");
-		label_4.setBounds(207, 145, 51, 16);
+		label_4.setBounds(229, 145, 65, 16);
 		panel.add(label_4);
 		
-		qtdeCinCent = new JTextField();
-		qtdeCinCent.setBounds(69, 55, 116, 22);
+		qtdeCinCent = new JTextField("0");
+		
+		/* moeda ou moedas */
+		if (opMaq.getMaquina().getCinCent() == 0){
+			qtdeCinCent.setToolTipText("Vazio");
+		}
+		else if (opMaq.getMaquina().getCinCent() == 1){
+			qtdeCinCent.setToolTipText("Atual: " + Integer.toString(opMaq.getMaquina().getCinCent()) + " moeda");
+		}
+		else{
+			qtdeCinCent.setToolTipText("Atual: " + Integer.toString(opMaq.getMaquina().getCinCent()) + " moedas");
+		}
+		
+		qtdeCinCent.setBounds(96, 56, 116, 22);
 		panel.add(qtdeCinCent);
 		qtdeCinCent.setColumns(10);
 		
-		qtdeUmReal = new JTextField();
-		qtdeUmReal.setBounds(69, 109, 116, 22);
+		
+		qtdeUmReal = new JTextField("0");
+		
+		/* moeda ou moedas */
+		if (opMaq.getMaquina().getUmReal() == 0){
+			qtdeUmReal.setToolTipText("Vazio");
+		}
+		else if(opMaq.getMaquina().getUmReal() == 1){
+			qtdeUmReal.setToolTipText("Atual: " + Integer.toString(opMaq.getMaquina().getUmReal()) + " moeda");
+		}
+		else{
+			qtdeUmReal.setToolTipText("Atual: " + Integer.toString(opMaq.getMaquina().getUmReal()) + " moedas");
+		}
+		
+		qtdeUmReal.setBounds(96, 110, 116, 22);
 		panel.add(qtdeUmReal);
 		qtdeUmReal.setColumns(10);
 		
-		qtdeDoisReal = new JTextField();
-		qtdeDoisReal.setBounds(69, 164, 116, 22);
+		
+		qtdeDoisReal = new JTextField("0");
+		
+		/* cédula ou cédulas */
+		if (opMaq.getMaquina().getDoisReal() == 0){
+			qtdeDoisReal.setToolTipText("Vazio");
+		}
+		else if(opMaq.getMaquina().getDoisReal() == 1){
+			qtdeDoisReal.setToolTipText("Atual: " + Integer.toString(opMaq.getMaquina().getDoisReal()) + " cédula");
+		}
+		else{
+			qtdeDoisReal.setToolTipText("Atual: " + Integer.toString(opMaq.getMaquina().getDoisReal()) + " cédulas");
+		}
+		
+		qtdeDoisReal.setBounds(96, 165, 116, 22);
 		panel.add(qtdeDoisReal);
 		qtdeDoisReal.setColumns(10);
 		
-		qtdeCinReal = new JTextField();
-		qtdeCinReal.setBounds(260, 80, 116, 22);
+		qtdeCinReal = new JTextField("0");
+		
+		
+		/* céedula ou cédulas */
+		if (opMaq.getMaquina().getCincoReal() == 0){
+			qtdeCinReal.setToolTipText("Vazio");
+		}
+		else if(opMaq.getMaquina().getCincoReal() == 1){
+			qtdeCinReal.setToolTipText("Atual: " + Integer.toString(opMaq.getMaquina().getCincoReal()) + " cédula");
+		}
+		else{
+			qtdeCinReal.setToolTipText("Atual: " + Integer.toString(opMaq.getMaquina().getCincoReal()) + " cédulas");
+		}
+		
+		qtdeCinReal.setBounds(304, 81, 116, 22);
 		panel.add(qtdeCinReal);
 		qtdeCinReal.setColumns(10);
 		
-		qtdeDezReal = new JTextField();
-		qtdeDezReal.setBounds(260, 142, 116, 22);
+		qtdeDezReal = new JTextField("0");
+		
+			
+		/* cédula ou cédulas */
+		if (opMaq.getMaquina().getDezReal() == 0){
+			qtdeDezReal.setToolTipText("Vazio");
+		}
+		else if(opMaq.getMaquina().getDezReal() == 1){
+			qtdeDezReal.setToolTipText("Atual: " + Integer.toString(opMaq.getMaquina().getDezReal()) + " cédula");
+		}
+		else{
+			qtdeDezReal.setToolTipText("Atual: " + Integer.toString(opMaq.getMaquina().getDezReal()) + " cédulas");
+		}
+		
+		qtdeDezReal.setBounds(304, 143, 116, 22);
 		panel.add(qtdeDezReal);
 		qtdeDezReal.setColumns(10);
 		
+		
+		JLabel lblAdicionarSaldo = new JLabel("Adicionar saldo");
+		lblAdicionarSaldo.setBounds(166, 12, 116, 15);
+		panel.add(lblAdicionarSaldo);
+		
 		JButton button = new JButton("Reabastecer");
-		button.setBounds(260, 189, 116, 25);
+		button.setBounds(75, 216, 137, 25);
 		panel.add(button);
+		
+		voltarTelaAnterior = new JButton("Voltar");
+		voltarTelaAnterior.setBounds(241, 216, 137, 25);
+		panel.add(voltarTelaAnterior);
 		
 		alert = new JPanel();
 		alert.setBounds(0, 0, 432, 253);
@@ -145,22 +221,38 @@ public class GerenciarCash extends JFrame {
 		alert.add(btnVoltar);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				maquina.setCinCent(Integer.valueOf(qtdeCinCent.getText()));
-				maquina.setUmReal(Integer.valueOf(qtdeUmReal.getText()));
-				maquina.setDoisReal(Integer.valueOf(qtdeDoisReal.getText()));
-				maquina.setCincoReal(Integer.valueOf(qtdeCinReal.getText()));
-				maquina.setDezReal(Integer.valueOf(qtdeDezReal.getText()));
-				System.out.println(""+maquina.getCinCent()+" "+maquina.getUmReal()+" "+maquina.getDoisReal()
-				+" "+maquina.getCincoReal()+" "+maquina.getDezReal());
+				MaquinaDAO maquinaDAO = new MaquinaDAO();
+				maquina.setCinCent(Integer.valueOf(qtdeCinCent.getText()) + opMaq.getMaquina().getCinCent());
+				maquina.setUmReal(Integer.valueOf(qtdeUmReal.getText()) + opMaq.getMaquina().getUmReal());
+				maquina.setDoisReal(Integer.valueOf(qtdeDoisReal.getText()) + opMaq.getMaquina().getDoisReal());
+				maquina.setCincoReal(Integer.valueOf(qtdeCinReal.getText()) + opMaq.getMaquina().getCincoReal());
+				maquina.setDezReal(Integer.valueOf(qtdeDezReal.getText()) + opMaq.getMaquina().getDezReal());
+				maquina.setDinheiroVendas(opMaq.getMaquina().getDinheiroVendas());
+				
+				
+				maquina.setId(opMaq.getMaquina().getId());
+				System.out.println("50 cent. "+maquina.getCinCent()+" 1 real "+maquina.getUmReal()+" 2 reais "+maquina.getDoisReal()
+				+" 5 reais "+maquina.getCincoReal()+" 10 reais "+maquina.getDezReal() + " id " + opMaq.getMaquina().getId()
+				+ " dinheiro vendas " + opMaq.getMaquina().getDinheiroVendas());
 				//atualiza a maquina no objeto OperadorMaquina
 				GerenciarCash.this.operadorMaquina.setMaquina(maquina);
 				
 				//DESCOMENTAR LINHA ABAIXO PARA ATUALIZACAO NO BANCO
-				//maquinaDAO.updateMaquina(maquina);
+				maquinaDAO.updateMaquina(maquina);
 				panel.setVisible(false);
 				alert.setVisible(true);
 			}
 		});
+		
+		voltarTelaAnterior.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				System.out.println("voltar clicado!");
+				GerenciarCash.this.setVisible(false);
+				OperadorMaquinaMain opMaq = new OperadorMaquinaMain(operadorMaquina);
+				opMaq.setVisible(true);
+			}
+		});
+		
+		
 	}
-
 }

@@ -1,4 +1,4 @@
-package view.operador;
+package grafico.operador;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;

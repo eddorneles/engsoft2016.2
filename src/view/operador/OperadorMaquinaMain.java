@@ -1,4 +1,4 @@
-package view.operador;
+package grafico.operador;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -10,7 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import dao.OperadorDAO;
 import dominio.Maquina;
+import dominio.Operador;
 import dominio.OperadorMaquina;
 
 public class OperadorMaquinaMain extends JFrame {
@@ -40,8 +42,9 @@ public class OperadorMaquinaMain extends JFrame {
 	 * Create the frame.
 	 */
 	public OperadorMaquinaMain(OperadorMaquina opMaq) {
+		setLocationByPlatform(true);
 		//substituir linha abaixo por 'this.maquina = opMaq.getMaquina()'
-		this.maquina = new Maquina();
+		this.maquina = opMaq.getMaquina();
 		
 		//substituir linha abaixo por 'this.operadorMaquina = opMaq'
 		this.operadorMaquina = opMaq;
@@ -58,11 +61,12 @@ public class OperadorMaquinaMain extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel lblMaquinaId = new JLabel("Maquina ID:");
-		lblMaquinaId.setBounds(47, 32, 69, 16);
+		lblMaquinaId.setBounds(47, 32, 100, 16);
 		panel.add(lblMaquinaId);
 		
 		JLabel maquinaIdLbl = new JLabel("");
-		maquinaIdLbl.setBounds(269, 50, -126, -28);
+		maquinaIdLbl.setText(""+maquina.getId());
+		maquinaIdLbl.setBounds(137, 26, 20, 28);
 		panel.add(maquinaIdLbl);
 		
 		JButton btnGerenciarCash = new JButton("Gerenciar Cash");
@@ -73,19 +77,43 @@ public class OperadorMaquinaMain extends JFrame {
 				OperadorMaquinaMain.this.setVisible(false);
 				
 				//deletar linha abixo quando for iniciar a aplicacao com o banco
-				OperadorMaquinaMain.this.operadorMaquina = new OperadorMaquina();
+				//OperadorMaquinaMain.this.operadorMaquina = new OperadorMaquina();
 				operadorMaquina.setMaquina(maquina);
 				GerenciarCash gerenciarCash = new GerenciarCash(operadorMaquina);
 				gerenciarCash.setVisible(true);
 				
 			}
 		});
-		btnGerenciarCash.setBounds(47, 116, 131, 25);
+		btnGerenciarCash.setBounds(47, 116, 180, 25);
 		panel.add(btnGerenciarCash);
 		
 		JButton btnGerenciarEstoque = new JButton("Gerenciar Estoque");
-		btnGerenciarEstoque.setBounds(211, 116, 137, 25);
+		btnGerenciarEstoque.setBounds(211, 116, 180, 25);
 		panel.add(btnGerenciarEstoque);
+		
+		JButton voltarTelaAnterior = new JButton("Voltar");
+		voltarTelaAnterior.setBounds(303, 216, 117, 25);
+		panel.add(voltarTelaAnterior);
+		
+		voltarTelaAnterior.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				System.out.println("voltar clicado!");
+				OperadorMaquinaMain.this.setVisible(false);
+				
+				/* Redefine operador */
+				//OperadorDAO operadorDAO = new OperadorDAO();
+				Operador operador = opMaq.getOperador();
+				/*operador.setId(opMaq.getOperador().getId());
+				operador.setLogin(opMaq.getOperador().getLogin());
+				operador.setNome(opMaq.getOperador().getNome());
+				operador.setSenha(opMaq.getOperador().getSenha());*/
+				
+				//OperadorMaquinaMain opMaq = new OperadorMaquinaMain(operadorMaquina);
+				//opMaq.setVisible(true);
+				OperadorLogado frame = new OperadorLogado(operador);
+				frame.setVisible(true);
+			}
+		});
 		
 		
 		
