@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="337.0" maxWidth="775.0" minHeight="337.0" minWidth="775.0" prefHeight="337.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="grafico.usuario.PainelAdicionarSaldoControle">
+   <children>
+      <HBox prefHeight="480.0" prefWidth="781.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox prefHeight="480.0" prefWidth="140.0">
+               <children>
+                  <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../img/50centavos.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets left="10.0" top="30.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <HBox prefHeight="73.0" prefWidth="140.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#handleBtnReduzirCinquentaCentavos" prefWidth="60.0" text="-" />
+                        <TextField fx:id="txtCinquentaCentavos" prefWidth="60.0" />
+                        <Button mnemonicParsing="false" onAction="#handleBtnAdicionarCinquentaCentavos" prefWidth="60.0" text="+" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="25.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </VBox>
+            <VBox prefHeight="480.0" prefWidth="140.0">
+               <children>
+                  <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../img/real01_x160.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets left="10.0" top="30.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <HBox prefHeight="73.0" prefWidth="140.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#handleBtnReduzirUmReal" prefWidth="60.0" text="-" />
+                        <TextField fx:id="txtUmReal" prefWidth="60.0" />
+                        <Button mnemonicParsing="false" onAction="#handleBtnAdicionarUmReal" prefWidth="60.0" text="+" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="25.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="140.0">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../img/ced02_2.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin></ImageView>
+                  <HBox prefHeight="73.0" prefWidth="140.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#handleBtnReduzirDoisReal" prefWidth="60.0" text="-" />
+                        <TextField fx:id="txtDoisReal" prefWidth="60.0" />
+                        <Button mnemonicParsing="false" onAction="#handleBtnAdicionarDoisReal" prefWidth="60.0" text="+" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="140.0">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../img/ced05_2.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <HBox prefHeight="73.0" prefWidth="140.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#handleBtnReduzirCincoReal" prefWidth="60.0" text="-" />
+                        <TextField fx:id="txtCincoReal" prefWidth="60.0" />
+                        <Button mnemonicParsing="false" onAction="#handleBtnAdicionarCincoReal" prefWidth="60.0" text="+" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="140.0">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../img/ced10_2.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <HBox prefHeight="73.0" prefWidth="140.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#handleBtnReduzirDezReal" prefWidth="60.0" text="-" />
+                        <TextField fx:id="txtDezReal" prefWidth="60.0" />
+                        <Button mnemonicParsing="false" onAction="#handleBtnAdicionarDezReal" prefWidth="60.0" text="+" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <Pane prefHeight="313.0" prefWidth="148.0">
+                     <children>
+                        <Button layoutY="96.0" mnemonicParsing="false" onAction="#handleBtnInserir" prefHeight="26.0" prefWidth="68.0" text="Inserir" />
+                        <Button layoutX="68.0" layoutY="96.0" mnemonicParsing="false" onAction="#fechar" text="Cancelar" />
+                     </children>
+                  </Pane>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
