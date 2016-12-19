@@ -6,6 +6,7 @@ import java.awt.Button;
 import java.util.HashMap;
 import java.util.Map;
 
+import def.TipoDinheiro;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 
@@ -43,7 +44,7 @@ public class PainelAdicionarSaldoControle {
 	@FXML
 	private Button btnAdicionarDezReal;
 	
-	private HashMap<String,Integer> cedulasSaldo;
+	private HashMap<TipoDinheiro,Integer> cedulasSaldo;
 	
 	private boolean btnInserirClicado = false;
 	private boolean cancelarClicado = false;
@@ -61,7 +62,7 @@ public class PainelAdicionarSaldoControle {
 		this.stageAdicionarSaldo = stage;
 	}
 	
-	public HashMap<String, Integer> getCedulasSaldos(){
+	public HashMap<TipoDinheiro, Integer> getCedulasSaldos(){
 		return this.cedulasSaldo;
 	}
 
@@ -181,16 +182,16 @@ public class PainelAdicionarSaldoControle {
 	
 	@FXML
 	private void handleBtnInserir(){
-		HashMap <String, Integer> cedulasInseridas = new HashMap<String, Integer>();
-		cedulasInseridas.put( "CinCet", Integer.parseInt( txtCinquentaCentavos.getText() ) );
-		cedulasInseridas.put( "UmReal", Integer.parseInt( txtUmReal.getText() ) );
-		cedulasInseridas.put( "DoisReal", Integer.parseInt( txtDoisReal.getText() ) );
-		cedulasInseridas.put( "CincoReal", Integer.parseInt( txtCincoReal.getText() ) );
-		cedulasInseridas.put( "DezReal", Integer.parseInt( txtDezReal.getText() ) );
+		HashMap <TipoDinheiro, Integer> cedulasInseridas = new HashMap<TipoDinheiro, Integer>();
+		cedulasInseridas.put( TipoDinheiro.CINQUENTA_CENTAVOS, Integer.parseInt( txtCinquentaCentavos.getText() ) );
+		cedulasInseridas.put( TipoDinheiro.UM_REAL, Integer.parseInt( txtUmReal.getText() ) );
+		cedulasInseridas.put( TipoDinheiro.DOIS_REAIS, Integer.parseInt( txtDoisReal.getText() ) );
+		cedulasInseridas.put( TipoDinheiro.CINCO_REAIS, Integer.parseInt( txtCincoReal.getText() ) );
+		cedulasInseridas.put( TipoDinheiro.DEZ_REAIS, Integer.parseInt( txtDezReal.getText() ) );
 		stageAdicionarSaldo.close();
 		this.cedulasSaldo = cedulasInseridas; 
 		this.btnInserirClicado = true;
-		for(Map.Entry<String, Integer> entry: cedulasInseridas.entrySet() ){
+		for(Map.Entry<TipoDinheiro, Integer> entry: cedulasInseridas.entrySet() ){
 			System.out.println(entry.getKey().toString());
 			System.out.println(entry.getValue().toString());
 		} //END for
