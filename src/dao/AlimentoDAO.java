@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import dominio.Alimento;
@@ -69,10 +70,6 @@ public class AlimentoDAO {
 		return alimentos;
 	}
 	
-	public void insetAlimento(Alimento alimento){
-		
-	}
-	
 	public void deleteAlimento(Alimento alimento){
 		
 		Connection con = new DAO().getConnection();
@@ -114,7 +111,7 @@ public class AlimentoDAO {
 			smtm.executeUpdate();
 			smtm.close();
 			
-		} catch (SQLException e) {
+		} catch ( SQLException e ) {
 			e.printStackTrace();
 		} finally{
 			try {
@@ -123,5 +120,31 @@ public class AlimentoDAO {
 				e.printStackTrace();
 			}
 		}
-	}
-}
+	}//END decrementoQuantidade
+	
+	public void atualizaQuantidade( Alimento alimento ){
+		Connection con = new DAO().getConnection(); 
+		
+		String sql = "UPDATE alimento SET quantidade = ? "
+				+ "WHERE  id_maquina = ? AND id_bandeja = ? ";
+		try{
+			PreparedStatement smtm = con.prepareStatement( sql );
+			int i = 1;
+			smtm.setInt( i , alimento.getQuantidade() );
+			smtm.setInt( i++ , alimento.getMaquina().getId() );
+			smtm.setInt( i++ , alimento.getBandeja().getId() );
+			smtm.executeUpdate();
+			smtm.close();
+			
+		}catch( SQLException e ){
+			e.printStackTrace();
+		} finally {
+			try{
+				con.close();
+			} catch( SQLException e ){
+				e.printStackTrace();
+			}
+		}// END try 
+	}// END atualizaQuantidade
+	
+}//END class

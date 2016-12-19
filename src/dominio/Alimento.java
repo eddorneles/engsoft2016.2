@@ -5,7 +5,6 @@ import java.util.Date;
 
 public class Alimento {
 
-	
 	private TipoAlimento tipoAlimento;
 	
 	private Maquina maquina;
@@ -16,6 +15,11 @@ public class Alimento {
 
 	private int quantidade;
 	
+	
+	public void decrementaQuantidade(){
+		this.quantidade--;
+	}
+	
 	public int getQuantidade(){
 		return quantidade;
 	}
@@ -24,8 +28,6 @@ public class Alimento {
 		this.quantidade = quantidade;
 	}
 	
-	
-
 	public TipoAlimento getTipoAlimento() {
 		return tipoAlimento;
 	}
@@ -33,8 +35,6 @@ public class Alimento {
 	public void setTipoAlimento(TipoAlimento tipoAlimento) {
 		this.tipoAlimento = tipoAlimento;
 	}
-
-
 
 	public Date getDataCadastro() {
 		return dataCadastro;

@@ -1,40 +1,45 @@
 package mbeam;
 
-import dao.*;
-import dominio.*;
+import dao.AlimentoDAO;
+import dao.MaquinaDAO;
+
+import dominio.Alimento;
+import dominio.Maquina;
+
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Date;;
+import org.joda.time.DateTime;
+
+
+import def.TipoDinheiro;
 
 public class Compra {
 	private int umReal = 0, doisReal = 0, cincoReal = 0, dezReal = 0, cinCent = 0;
 	private double saldoInserido;
 	
-	HashMap<String, Integer> troco;
+	HashMap<TipoDinheiro, Integer> troco;
 	
 	public boolean realizaCompra( Maquina maquina , Alimento alimento ,
-			HashMap<String,Integer> mapCedulas ){
-	
+			HashMap<TipoDinheiro,Integer> mapCedulas ){
 		
 		double saldo = calculaSaldo( mapCedulas );
 		//Se o saldo_inserido for maior ou igual ao preco, então a compra pode ocorrer
 		if ( saldo >= alimento.getTipoAlimento().getPreco() ){
-			HashMap<String,Integer> mapTroco = calcularTroco( maquina, alimento , saldo );
+			HashMap<TipoDinheiro,Integer> mapTroco = calcularTroco( maquina, alimento , saldo );
 			
 			if( mapTroco != null ){
 				
 				AlimentoDAO alimentoDAO = new AlimentoDAO();
-				if(alimento.getQuantidade() > 1){
-					alimentoDAO.decrementoQuantidade(alimento);
-				}
-				else{
-					alimentoDAO.deleteAlimento( alimento );
+				//Se houver algum alimento na bandeja
+				if(alimento.getQuantidade() > 0 ){
+					alimento.setQuantidade( alimento.getQuantidade() - 1 );
+					alimentoDAO.atualizaQuantidade( alimento );
+					
 				}
 				double novoSaldoMaquina = maquina.getDinheiroVendas() + alimento.getTipoAlimento().getPreco();
 				maquina.setDinheiroVendas( novoSaldoMaquina );
 				MaquinaDAO maquinaDAO = new MaquinaDAO();
 				maquinaDAO.updateMaquina(maquina);
-				
 				setTroco(mapTroco);
 				
 				return true;
@@ -44,27 +49,27 @@ public class Compra {
 		return false;
 	}// END realizaCompra
 	
-	public double calculaSaldo( HashMap<String, Integer> mapCedulas ){
+	public double calculaSaldo( HashMap<TipoDinheiro , Integer> mapCedulas ){
 		double saldo = 0.0;
 		
-		saldo  = 0.5 * mapCedulas.get( "cinCent" );
-		saldo += 1 * mapCedulas.get( "umReal" );
-		saldo += 2 * mapCedulas.get( "doisReal" );
-		saldo += 5 * mapCedulas.get( "cincoReal" );
-		saldo += 10 * mapCedulas.get( "dezReal" );
+		// Para cada elemento presente em mapCedulas
+		for( Map.Entry<TipoDinheiro, Integer> entry : mapCedulas.entrySet() ){
+			saldo += (entry.getValue() * entry.getKey().get() );
+		}
 		return saldo;
 	}
 	
-	
-	public HashMap<String, Integer> calcularTroco( Maquina maquina, 
+	public HashMap<TipoDinheiro, Integer> calcularTroco( Maquina maquina, 
 			Alimento alimento , double valor_dinheiro ){
 		double trocoReceber;
 		int trocoParcial;
 		int cedulasCincoReal, cedulasDoisReal, moedasUmReal;
 		double moedasCinCentavos;
+		
 		trocoReceber = valor_dinheiro - alimento.getTipoAlimento().getPreco();
 		trocoParcial = (int) trocoReceber;
 		double somaParcial=0;
+		
 		//CÁLCULO PARA RECEBER CÉDULAS DE 5 REAIS
 		cedulasCincoReal = trocoParcial/5;
 		if( maquina.getCincoReal() < cedulasCincoReal ){
@@ -89,8 +94,10 @@ public class Compra {
 		//CÁLCULO PARA RECEBER MOEDAS DE 0,50
 		double trocoRestante = trocoReceber - somaParcial;
 		moedasCinCentavos = trocoRestante/0.5;
+		
 		if( maquina.getCinCent() >= (int) moedasCinCentavos ){
 			//A máquina deverá possuir a quantidade correta de cédulas e moedas
+			// Necessárias para retornar o troco esperado
 			MaquinaDAO maquinaDao = new MaquinaDAO();
 			maquina.setCincoReal( maquina.getCincoReal() - cedulasCincoReal );
 			maquina.setDoisReal( maquina.getDoisReal() - cedulasDoisReal );
@@ -98,17 +105,25 @@ public class Compra {
 			maquina.setCinCent( maquina.getCinCent() - (int) moedasCinCentavos);
 			
 			maquinaDao.updateMaquina( maquina );
-			HashMap<String, Integer> mapTroco = new HashMap<String, Integer>();
-			mapTroco.put( "cincoReal", cedulasCincoReal );
-			mapTroco.put( "doisReal", cedulasDoisReal );
-			mapTroco.put( "umReal", moedasUmReal );
-			mapTroco.put( "cinCent", (int) moedasCinCentavos );
+			HashMap<TipoDinheiro, Integer> mapTroco = new HashMap<TipoDinheiro, Integer>();
+			
+			mapTroco.put( TipoDinheiro.CINCO_REAIS, cedulasCincoReal );
+			mapTroco.put( TipoDinheiro.DOIS_REAIS, cedulasDoisReal );
+			mapTroco.put( TipoDinheiro.UM_REAL, moedasUmReal );
+			mapTroco.put( TipoDinheiro.CINQUENTA_CENTAVOS, (int) moedasCinCentavos );
+			mapTroco.put( TipoDinheiro.DOIS_REAIS, cedulasDoisReal );
+			
 			return mapTroco;
 		}
 		/*Se não houver cedulas ou moedas suficientes para troco, então não é possível gerar troco, 
 			portanto, retornar null
 		 */
 		return null;	
+	}
+	
+	public boolean verificaValidadeAlimento(){
+		
+		return false;
 	}
 	
 	public double getSaldoInserido() {
@@ -119,11 +134,11 @@ public class Compra {
 		this.saldoInserido = saldoInserido;
 	}
 
-	private void setTroco(HashMap<String, Integer> troco){
+	private void setTroco( HashMap<TipoDinheiro, Integer> troco){
 		this.troco = troco;
 	}
 	
-	public HashMap<String, Integer> getTroco(){
+	public HashMap<TipoDinheiro, Integer> getTroco(){
 		return troco;
 	}
 }

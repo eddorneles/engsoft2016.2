@@ -1,6 +1,7 @@
 package maquina_de_alimentos;
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -8,6 +9,7 @@ import java.util.Scanner;
 import dao.*;
 import dominio.*;
 import mbeam.Compra;
+import def.TipoDinheiro;
 
 public class MaquinaDeAlimentos {
 
@@ -51,23 +53,23 @@ public class MaquinaDeAlimentos {
 				
 				Alimento alimento = alimentos.get(alimentoSelecionado);
 				
-				HashMap<String, Integer> mapPagamento = new HashMap<String, Integer>();
+				HashMap<TipoDinheiro, Integer> mapPagamento = new HashMap<TipoDinheiro, Integer>();
 				System.out.println("Informe o pagamento");
 				
 				System.out.println("Moedas de cinquenta");
-				mapPagamento.put("cinCent", input.nextInt());
+				mapPagamento.put(TipoDinheiro.CINQUENTA_CENTAVOS, input.nextInt());
 				
 				System.out.println("Moedas de um");
-				mapPagamento.put("umReal", input.nextInt());
+				mapPagamento.put( TipoDinheiro.UM_REAL, input.nextInt());
 				
 				System.out.println("Cédulas de dois");
-				mapPagamento.put("doisReal", input.nextInt());
+				mapPagamento.put( TipoDinheiro.DOIS_REAIS, input.nextInt());
 				
 				System.out.println("Cédulas de 5");
-				mapPagamento.put("cincoReal", input.nextInt());
+				mapPagamento.put(TipoDinheiro.CINCO_REAIS , input.nextInt());
 				
 				System.out.println("Cédulas de 10");
-				mapPagamento.put("dezReal", input.nextInt());
+				mapPagamento.put( TipoDinheiro.DEZ_REAIS , input.nextInt());
 				
 				Compra compra = new Compra();
 				
@@ -75,9 +77,9 @@ public class MaquinaDeAlimentos {
 				
 				
 				if(compraRealizada){
-					Map<String, Integer> troco = compra.getTroco();
+					Map<TipoDinheiro, Integer> troco = compra.getTroco();
 					
-					for(Map.Entry<String, Integer> entry: troco.entrySet() ){
+					for(Map.Entry<TipoDinheiro, Integer> entry: troco.entrySet() ){
 						
 						System.out.println(entry.getKey().toString());
 						System.out.println(entry.getValue().toString());
