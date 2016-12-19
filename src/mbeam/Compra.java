@@ -34,7 +34,6 @@ public class Compra {
 				if(alimento.getQuantidade() > 0 ){
 					alimento.setQuantidade( alimento.getQuantidade() - 1 );
 					alimentoDAO.atualizaQuantidade( alimento );
-					
 				}
 				double novoSaldoMaquina = maquina.getDinheiroVendas() + alimento.getTipoAlimento().getPreco();
 				maquina.setDinheiroVendas( novoSaldoMaquina );
