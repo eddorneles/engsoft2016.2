@@ -184,8 +184,9 @@ public class PainelAdicionarSaldoControle {
 	private void handleBtnInserir(){
 		HashMap <TipoDinheiro, Integer> cedulasInseridas = new HashMap<TipoDinheiro, Integer>();
 		cedulasInseridas.put( TipoDinheiro.CINQUENTA_CENTAVOS, Integer.parseInt( txtCinquentaCentavos.getText() ) );
-		cedulasInseridas.put( TipoDinheiro.UM_REAL , Integer.parseInt( txtUmReal.getText() ) );
-		cedulasInseridas.put( TipoDinheiro.DOIS_REAIS , Integer.parseInt( txtDoisReal.getText() ) );
+
+		cedulasInseridas.put( TipoDinheiro.UM_REAL, Integer.parseInt( txtUmReal.getText() ) );
+		cedulasInseridas.put( TipoDinheiro.DOIS_REAIS, Integer.parseInt( txtDoisReal.getText() ) );
 		cedulasInseridas.put( TipoDinheiro.CINCO_REAIS, Integer.parseInt( txtCincoReal.getText() ) );
 		cedulasInseridas.put( TipoDinheiro.DEZ_REAIS, Integer.parseInt( txtDezReal.getText() ) );
 		stageAdicionarSaldo.close();

@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import dao.*;
+import def.TipoDinheiro;
 import dominio.*;
 import mbeam.Compra;
 import def.TipoDinheiro;
@@ -57,7 +58,7 @@ public class MaquinaDeAlimentos {
 				System.out.println("Informe o pagamento");
 				
 				System.out.println("Moedas de cinquenta");
-				mapPagamento.put(TipoDinheiro.CINQUENTA_CENTAVOS, input.nextInt());
+				mapPagamento.put( TipoDinheiro.CINQUENTA_CENTAVOS , input.nextInt());
 				
 				System.out.println("Moedas de um");
 				mapPagamento.put( TipoDinheiro.UM_REAL, input.nextInt());
@@ -66,10 +67,10 @@ public class MaquinaDeAlimentos {
 				mapPagamento.put( TipoDinheiro.DOIS_REAIS, input.nextInt());
 				
 				System.out.println("Cédulas de 5");
-				mapPagamento.put(TipoDinheiro.CINCO_REAIS , input.nextInt());
+				mapPagamento.put( TipoDinheiro.CINCO_REAIS, input.nextInt());
 				
 				System.out.println("Cédulas de 10");
-				mapPagamento.put( TipoDinheiro.DEZ_REAIS , input.nextInt());
+				mapPagamento.put( TipoDinheiro.DEZ_REAIS, input.nextInt());
 				
 				Compra compra = new Compra();
 				

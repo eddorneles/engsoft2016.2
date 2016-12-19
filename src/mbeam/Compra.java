@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 import org.joda.time.DateTime;
 
-
 import def.TipoDinheiro;
 
 public class Compra {
@@ -34,7 +33,6 @@ public class Compra {
 				if(alimento.getQuantidade() > 0 ){
 					alimento.setQuantidade( alimento.getQuantidade() - 1 );
 					alimentoDAO.atualizaQuantidade( alimento );
-					
 				}
 				double novoSaldoMaquina = maquina.getDinheiroVendas() + alimento.getTipoAlimento().getPreco();
 				maquina.setDinheiroVendas( novoSaldoMaquina );
@@ -120,8 +118,8 @@ public class Compra {
 		 */
 		return null;	
 	}
-	
-	public boolean verificaValidadeAlimento(){
+
+	private boolean verificaValidadeAlimento( Alimento alimento , Maquina maquina ){
 		
 		return false;
 	}
