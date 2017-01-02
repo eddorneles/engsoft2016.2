@@ -18,7 +18,7 @@ public class PainelAdicionarSaldoControle {
 	
 	private Compra compra;
 	
-	private boolean btnInserirClicado = false;
+	private boolean iniciouCompra = false;
 	private boolean cancelarClicado = false;
 	private Main main;
 	
@@ -58,13 +58,15 @@ public class PainelAdicionarSaldoControle {
 	// **************************************************************************
 	
 	public void initialize(){
-		if( this.cedulasSaldo == null ){
+		if( this.compra == null ){
 			this.cedulasSaldo = new HashMap<TipoDinheiro, Integer>();
 			this.cedulasSaldo.put(TipoDinheiro.CINQUENTA_CENTAVOS, 0 );
 			this.cedulasSaldo.put(TipoDinheiro.UM_REAL, 0 );
 			this.cedulasSaldo.put(TipoDinheiro.DOIS_REAIS, 0 );
 			this.cedulasSaldo.put(TipoDinheiro.CINCO_REAIS, 0 );
 			this.cedulasSaldo.put(TipoDinheiro.DEZ_REAIS, 0 );
+		}else{
+			this.cedulasSaldo = compra.getDinheiroInserido();
 		}
 		mostraTxtDinheiro();
 	}//END initialize
@@ -204,25 +206,31 @@ public class PainelAdicionarSaldoControle {
 	
 	/* ********************************************************************************* */
 	
-	
 	@FXML
-	private void handleBtnInserir(){
+	private boolean handleBtnInserir(){
 		HashMap <TipoDinheiro, Integer> cedulasInseridas = new HashMap<TipoDinheiro, Integer>();
 		cedulasInseridas.put( TipoDinheiro.CINQUENTA_CENTAVOS, Integer.parseInt( txtCinquentaCentavos.getText() ) );
 		cedulasInseridas.put( TipoDinheiro.UM_REAL, Integer.parseInt( txtUmReal.getText() ) );
 		cedulasInseridas.put( TipoDinheiro.DOIS_REAIS, Integer.parseInt( txtDoisReal.getText() ) );
 		cedulasInseridas.put( TipoDinheiro.CINCO_REAIS, Integer.parseInt( txtCincoReal.getText() ) );
 		cedulasInseridas.put( TipoDinheiro.DEZ_REAIS, Integer.parseInt( txtDezReal.getText() ) );
-		stageAdicionarSaldo.close();
-		this.cedulasSaldo = cedulasInseridas;
-		this.btnInserirClicado = true;
-		Compra compra = new Compra();
 		
-		// PRINTAR NO CONSOLE VALOR INSERIDO
-		for(Map.Entry<TipoDinheiro, Integer> entry: cedulasInseridas.entrySet() ){
-			System.out.println(entry.getKey().toString());
-			System.out.println(entry.getValue().toString());
-		} //END for
+		this.cedulasSaldo = cedulasInseridas;
+		iniciaCompra();
+		stageAdicionarSaldo.close();
+		return true;
+	}
+	
+	private boolean iniciaCompra(){
+		Compra compra = new Compra();
+		compra.setDinheiroInserido( this.cedulasSaldo );
+		if( compra.calculaSaldo() > 0 ){
+			this.compra = compra;
+			this.iniciouCompra = true;
+			return true;
+		}
+		return false;
+		
 	}
 	
 	@FXML
@@ -234,17 +242,17 @@ public class PainelAdicionarSaldoControle {
 	public boolean isCancelarClicado(){
 		return this.cancelarClicado;
 	}
-	 
-	/*
-	public boolean saldoInserido(){
-		if( this.btnInserirClicado &&  )
-			return true;
-	}
-	*/
 	
-	//
-	public void setCompra(){
+	public void setCompra( Compra compra ){
+		this.compra = compra;
+	}
+	public Compra getCompra(){
+		return this.compra;
 		
+	}
+	
+	public boolean getIniciouCompra(){
+		return this.iniciouCompra;
 	}
 	
 	public void setMain( Main main ){

@@ -49,7 +49,17 @@ public class Compra {
 		return false;
 	}// END realizaCompra
 	
-	public double calculaSaldo( HashMap<TipoDinheiro , Integer> mapCedulas ){
+	public double calculaSaldo(){
+		double saldo = 0.0;
+		
+		// Para cada elemento presente em mapCedulas
+		for( Map.Entry<TipoDinheiro, Integer> entry : this.mapDinheiroInserido.entrySet() ){
+			saldo += (entry.getValue() * entry.getKey().get() );
+		}
+		return saldo;
+	}
+	
+	public double calculaSaldo( HashMap<TipoDinheiro, Integer> mapCedulas ){
 		double saldo = 0.0;
 		
 		// Para cada elemento presente em mapCedulas
@@ -130,6 +140,16 @@ public class Compra {
 		return saldoInserido;
 	}
 
+	public HashMap<TipoDinheiro, Integer> getDinheiroInserido(){
+		return this.mapDinheiroInserido;
+	}	
+	
+	public void setDinheiroInserido( HashMap<TipoDinheiro, Integer> dinheiroInserido){
+		this.mapDinheiroInserido = dinheiroInserido;
+	}
+	
+
+
 	public void setSaldoInserido(double saldoInserido) {
 		this.saldoInserido = saldoInserido;
 	}
@@ -141,4 +161,13 @@ public class Compra {
 	public HashMap<TipoDinheiro, Integer> getTroco(){
 		return troco;
 	}
+	
+	/*
+	 * // PRINTAR NO CONSOLE VALOR INSERIDO
+		for( Map.Entry<TipoDinheiro, Integer> entry: cedulasInseridas.entrySet() ){
+			System.out.println(entry.getKey().toString());
+			System.out.println(entry.getValue().toString());
+		} //END for
+	 */
+	 
 }
