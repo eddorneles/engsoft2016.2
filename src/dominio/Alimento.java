@@ -5,7 +5,6 @@ import java.util.Date;
 
 public class Alimento {
 
-	
 	private TipoAlimento tipoAlimento;
 	
 	private Maquina maquina;

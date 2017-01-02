@@ -3,6 +3,7 @@ package view.usuario;
 import java.io.IOException;
 import java.util.HashMap;
 
+import def.TipoDinheiro;
 import javafx.application.Application;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -18,6 +19,7 @@ public class Main extends Application {
 	private Stage primaryStage;
 	private BorderPane rootLayout;
 	private Compra compra;
+	private HashMap<TipoDinheiro, Integer> mapDinheiroSaldo;
 	
 	@Override
 	public void start( Stage primaryStage ) {
@@ -57,7 +59,6 @@ public class Main extends Application {
 		}
 	}
 	
-	
 	public void apresentaPainelAdicionarSaldo(){
 		try{
 			FXMLLoader fxmlLoader = new FXMLLoader();
@@ -77,14 +78,6 @@ public class Main extends Application {
 	        controle.setStageAdicionarSaldo( dialogStage );
 	        dialogStage.showAndWait();
 	        
-	        if( controle.isBtnInserirClicado() ){
-	        	this.compra = new Compra();
-	        	double saldo = compra.calculaSaldo( controle.getCedulasSaldos() );
-	        	if( saldo > 0 ){
-	        		compra.setSaldoInserido( saldo );
-	        	}
-	        	
-	        }
 		}catch( IOException e ){
 			e.printStackTrace();
 		}

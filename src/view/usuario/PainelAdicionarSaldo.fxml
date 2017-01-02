@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="337.0" maxWidth="775.0" minHeight="337.0" minWidth="775.0" prefHeight="337.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="grafico.usuario.PainelAdicionarSaldoControle">
+<AnchorPane maxHeight="337.0" maxWidth="775.0" minHeight="337.0" minWidth="775.0" prefHeight="337.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.usuario.PainelAdicionarSaldoControle">
    <children>
       <HBox prefHeight="480.0" prefWidth="781.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>

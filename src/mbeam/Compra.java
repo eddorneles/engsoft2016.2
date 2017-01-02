@@ -17,7 +17,8 @@ public class Compra {
 	private int umReal = 0, doisReal = 0, cincoReal = 0, dezReal = 0, cinCent = 0;
 	private double saldoInserido;
 	
-	HashMap<TipoDinheiro, Integer> troco;
+	private HashMap<TipoDinheiro, Integer> mapDinheiroInserido;
+	private HashMap<TipoDinheiro, Integer> troco;
 	
 	public boolean realizaCompra( Maquina maquina , Alimento alimento ,
 			HashMap<TipoDinheiro,Integer> mapCedulas ){
