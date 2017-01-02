@@ -13,8 +13,6 @@ public class PainelAlimentosControle {
 	
 	private double saldo;
 	
-	
-	
 	public double getSaldo() {
 		return saldo;
 	}
@@ -34,9 +32,7 @@ public class PainelAlimentosControle {
 	
 	@FXML
 	private void handleBtnAdicionarSaldo(){
-		main.apresentaPainelAdicionarSaldo();
-		
-		
+		main.apresentaPainelAdicionarSaldo( );
 	}
 	
 	public void setMain( Main main ){

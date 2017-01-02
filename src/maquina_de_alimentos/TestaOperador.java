@@ -42,13 +42,9 @@ public static void main(String[] args){
 			System.out.println("Login ou senha errado");
 		}
 		else{
-			
 			System.out.printf("Logado como operador: %d, Nome: %s\n",
 					operador.getId(), operador.getNome());
-		
-
 			System.out.println("Selecione uma máquina:");
-			
 			List <Maquina> maquinasOperador = opMDAO.getAllMaquinaOperador(operador);
 			if(!maquinasOperador.isEmpty()){
 				for(int i=0; i<maquinasOperador.size(); i++){

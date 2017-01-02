@@ -9,10 +9,20 @@ import java.util.Map;
 import def.TipoDinheiro;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
+import mbeam.Compra;
 
 public class PainelAdicionarSaldoControle {
 	private Stage stageAdicionarSaldo;
 	
+	private HashMap<TipoDinheiro,Integer> cedulasSaldo;
+	
+	private Compra compra;
+	
+	private boolean btnInserirClicado = false;
+	private boolean cancelarClicado = false;
+	private Main main;
+	
+	// BEGIN ELEMENTOS DE INTERFACE
 	@FXML
 	private TextField txtCinquentaCentavos;
 	@FXML
@@ -44,18 +54,32 @@ public class PainelAdicionarSaldoControle {
 	@FXML
 	private Button btnAdicionarDezReal;
 	
-	private HashMap<TipoDinheiro,Integer> cedulasSaldo;
-	
-	private boolean btnInserirClicado = false;
-	private boolean cancelarClicado = false;
-	
+	// END ELEMENTOS DE INTERFACE
+	// **************************************************************************
 	
 	public void initialize(){
-		txtCinquentaCentavos.setText( "0" );
-		txtUmReal.setText( "0" );
-		txtDoisReal.setText( "0" );
-		txtCincoReal.setText( "0" );
-		txtDezReal.setText( "0" );
+		if( this.cedulasSaldo == null ){
+			this.cedulasSaldo = new HashMap<TipoDinheiro, Integer>();
+			this.cedulasSaldo.put(TipoDinheiro.CINQUENTA_CENTAVOS, 0 );
+			this.cedulasSaldo.put(TipoDinheiro.UM_REAL, 0 );
+			this.cedulasSaldo.put(TipoDinheiro.DOIS_REAIS, 0 );
+			this.cedulasSaldo.put(TipoDinheiro.CINCO_REAIS, 0 );
+			this.cedulasSaldo.put(TipoDinheiro.DEZ_REAIS, 0 );
+		}
+		mostraTxtDinheiro();
+	}//END initialize
+	
+	private void mostraTxtDinheiro(){
+		txtCinquentaCentavos.setText (
+				Integer.toString( cedulasSaldo.get( TipoDinheiro.CINQUENTA_CENTAVOS ) ) );
+		txtUmReal.setText (
+				Integer.toString( cedulasSaldo.get( TipoDinheiro.UM_REAL ) ) );
+		txtDoisReal.setText (
+				Integer.toString( cedulasSaldo.get( TipoDinheiro.DOIS_REAIS ) ) );
+		txtCincoReal.setText (
+				Integer.toString( cedulasSaldo.get( TipoDinheiro.CINCO_REAIS ) ) );
+		txtDezReal.setText (
+				Integer.toString( cedulasSaldo.get( TipoDinheiro.DEZ_REAIS ) ) );
 	}
 	
 	public void setStageAdicionarSaldo( Stage stage ){
@@ -79,6 +103,7 @@ public class PainelAdicionarSaldoControle {
 	
 	@FXML
 	public void handleBtnReduzirCinquentaCentavos(){
+		
 		int num = validaValorTextInteiro( txtCinquentaCentavos.getText() );
 		num--;
 		if( num < 0){
@@ -190,8 +215,11 @@ public class PainelAdicionarSaldoControle {
 		cedulasInseridas.put( TipoDinheiro.CINCO_REAIS, Integer.parseInt( txtCincoReal.getText() ) );
 		cedulasInseridas.put( TipoDinheiro.DEZ_REAIS, Integer.parseInt( txtDezReal.getText() ) );
 		stageAdicionarSaldo.close();
-		this.cedulasSaldo = cedulasInseridas; 
+		this.cedulasSaldo = cedulasInseridas;
 		this.btnInserirClicado = true;
+		Compra compra = new Compra();
+		
+		// PRINTAR NO CONSOLE VALOR INSERIDO
 		for(Map.Entry<TipoDinheiro, Integer> entry: cedulasInseridas.entrySet() ){
 			System.out.println(entry.getKey().toString());
 			System.out.println(entry.getValue().toString());
@@ -207,11 +235,21 @@ public class PainelAdicionarSaldoControle {
 	public boolean isCancelarClicado(){
 		return this.cancelarClicado;
 	}
+	 
+	/*
+	public boolean saldoInserido(){
+		if( this.btnInserirClicado &&  )
+			return true;
+	}
+	*/
 	
-	public boolean isBtnInserirClicado(){
-		return this.btnInserirClicado;
+	//
+	public void setCompra(){
+		
 	}
 	
-	
+	public void setMain( Main main ){
+		this.main = main;
+	}
 	
 }//END class PainelAdicionarSaldoControle

@@ -22,11 +22,11 @@ public class MaquinaDeAlimentos {
 		
 		Scanner input = new Scanner(System.in);
 		
-		if(maquinas.isEmpty()){
+		if( maquinas.isEmpty() ){
 			System.out.println("Não tem máquina com produtos");
 		}
 		else{
-			for(int i=0; i<maquinas.size(); i++){
+			for(int i=0; i < maquinas.size(); i++){
 				System.out.printf("Máquina: %d\n",
 						i);
 			}
@@ -58,7 +58,7 @@ public class MaquinaDeAlimentos {
 				System.out.println("Informe o pagamento");
 				
 				System.out.println("Moedas de cinquenta");
-				mapPagamento.put( TipoDinheiro.CINQUENTA_CENTAVOS , input.nextInt());
+				mapPagamento.put( TipoDinheiro.CINQUENTA_CENTAVOS , input.nextInt() );
 				
 				System.out.println("Moedas de um");
 				mapPagamento.put( TipoDinheiro.UM_REAL, input.nextInt());
@@ -76,21 +76,18 @@ public class MaquinaDeAlimentos {
 				
 				boolean compraRealizada = compra.realizaCompra(maquina, alimento, mapPagamento);
 				
-				
-				if(compraRealizada){
+				if( compraRealizada ){
 					Map<TipoDinheiro, Integer> troco = compra.getTroco();
-					
 					for(Map.Entry<TipoDinheiro, Integer> entry: troco.entrySet() ){
 						
-						System.out.println(entry.getKey().toString());
-						System.out.println(entry.getValue().toString());
+						System.out.println(entry.getKey().toString() );
+						System.out.println(entry.getValue().toString() );
 					}
 				}
 				else{
 					System.out.println("Sua compra não pode ser realizada");
-				}
+				}//END if
 			}
 		}
-		
 	}
-}
+}//END class

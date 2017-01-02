@@ -3,7 +3,6 @@ package dominio;
 
 public class Maquina {
 
-
 	private int id;
 
 	private int cinCent;
