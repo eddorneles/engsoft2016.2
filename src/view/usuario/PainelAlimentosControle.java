@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import mbeam.Compra;
 import javafx.scene.control.Button;
 
 public class PainelAlimentosControle {
@@ -12,6 +13,9 @@ public class PainelAlimentosControle {
 	private Button btnAdicionarSaldo;
 	
 	private double saldo;
+	
+	@FXML
+	private Label lblSaldo;
 	
 	public double getSaldo() {
 		return saldo;
@@ -32,10 +36,29 @@ public class PainelAlimentosControle {
 	
 	@FXML
 	private void handleBtnAdicionarSaldo(){
-		main.apresentaPainelAdicionarSaldo( );
-	}
+		main.apresentaPainelAdicionarSaldo();
+		if( this.main.getCompra() != null ){
+			atualizaLabelSaldo();
+		}
+	}// END handleBtnAdicionarSaldo
 	
 	public void setMain( Main main ){
 		this.main = main;
+	}
+	
+	private void atualizaLabelSaldo(){
+		Compra compra = this.main.getCompra();
+		if( compra != null ){
+			double saldo = compra.calculaSaldo();
+			this.lblSaldo.setText( Double.toString( saldo ) + "0" );
+		}else{
+			this.lblSaldo.setText( "---" );
+		}
+	}// END atualizaLabelSaldo
+	
+	@FXML
+	private void handleBtnCancelarCompra(){
+		this.main.cancelaCompra();
+		this.atualizaLabelSaldo();
 	}
 }

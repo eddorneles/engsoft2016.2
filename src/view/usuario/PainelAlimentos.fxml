@@ -35,9 +35,9 @@
                         <AnchorPane prefHeight="259.0" prefWidth="237.0">
                            <children>
                               <Button layoutY="67.0" mnemonicParsing="false" onAction="#handleBtnAdicionarSaldo" prefHeight="26.0" prefWidth="237.0" text="Adicionar Saldo" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                              <Label layoutY="16.0" prefHeight="33.0" prefWidth="237.0" text="---" />
+                              <Label fx:id="lblSaldo" layoutY="16.0" prefHeight="33.0" prefWidth="237.0" text="---" />
                               <Label text="SALDO" />
-                              <Button layoutY="117.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="224.0" text="Cancelar Compra" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                              <Button layoutY="117.0" mnemonicParsing="false" onAction="#handleBtnCancelarCompra" prefHeight="26.0" prefWidth="224.0" text="Cancelar Compra" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                            </children>
                         </AnchorPane>
                      </children>

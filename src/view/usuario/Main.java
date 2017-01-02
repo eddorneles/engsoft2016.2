@@ -19,7 +19,7 @@ public class Main extends Application {
 	private Stage primaryStage;
 	private BorderPane rootLayout;
 	private Compra compra;
-	private HashMap<TipoDinheiro, Integer> mapDinheiroSaldo;
+	//private HashMap<TipoDinheiro, Integer> mapDinheiroSaldo;
 	
 	@Override
 	public void start( Stage primaryStage ) {
@@ -72,11 +72,15 @@ public class Main extends Application {
 	        dialogStage.initOwner( primaryStage );
 	        //Associação da scene ao stage
 	        Scene scene = new Scene( painelAdicionarSaldo );
-	        dialogStage.setScene( scene );
-	        
+	        dialogStage.setScene( scene );	        
 	        PainelAdicionarSaldoControle controle = fxmlLoader.getController();
 	        controle.setStageAdicionarSaldo( dialogStage );
+	        controle.setCompra( this.compra );
+	        controle.initialize(); //O uso desse método é necessário para atualizar a compra do objeto controle
 	        dialogStage.showAndWait();
+	        if( controle.getCompra() != null ){
+	        	this.compra = controle.getCompra();
+	        }
 	        
 		}catch( IOException e ){
 			e.printStackTrace();
@@ -85,6 +89,14 @@ public class Main extends Application {
 	
 	private void apresentaSaldo(){
 		
+	}
+	
+	public Compra getCompra(){
+		return this.compra;
+	}
+	
+	public void cancelaCompra(){
+		this.compra = null;
 	}
 	
 	public Stage getPrimaryStage(){
