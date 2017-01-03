@@ -82,6 +82,7 @@ public class Main extends Application {
 	        controle.setCompra( this.compra );
 	        controle.initialize(); //O uso desse método é necessário para atualizar a compra do objeto controle
 	        dialogStage.showAndWait();
+	        
 	        if( controle.getCompra() != null ){
 	        	this.compra = controle.getCompra();
 	        }
@@ -89,13 +90,6 @@ public class Main extends Application {
 		}catch( IOException e ){
 			e.printStackTrace();
 		}
-	}
-	
-	public void carregaAlimentos(){
-		MaquinaDAO maquinaDAO = new MaquinaDAO();
-		List<Maquina> maquinas = maquinaDAO.getAllMaquinasWithProducts();
-		
-		
 	}
 	
 	private void apresentaSaldo(){

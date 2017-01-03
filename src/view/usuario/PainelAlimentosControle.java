@@ -3,10 +3,8 @@ package view.usuario;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.AlimentoDAO;
-import dao.MaquinaDAO;
-import dominio.Alimento;
-import dominio.Maquina;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -17,13 +15,22 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
+
 import mbeam.Compra;
+import dao.AlimentoDAO;
+import dao.MaquinaDAO;
+import def.ResultadoCompra;
+import dominio.Alimento;
+import dominio.Maquina;
+import view.usuario.extended.ButtonAlimento;
 
 public class PainelAlimentosControle {
 	/* ATRIBUTOS */
 	private Main main;
+	
 	private double saldo;
 	private Compra compra;
+	private Maquina maquina;
 	
 	
 	private final int MAX_COLUMNS = 2;
@@ -50,8 +57,6 @@ public class PainelAlimentosControle {
 	private void initialize(){
 		
 	}
-	
-	
 	
 	@FXML
 	private void handleBtnAdicionarSaldo(){
@@ -90,28 +95,9 @@ public class PainelAlimentosControle {
 		List<Maquina> listaMaquinas = maquinaDAO.getAllMaquinasWithProducts();
 		if( listaMaquinas.isEmpty() == false ){
 			//Possui máquina com alimentos
-			Maquina maquina = listaMaquinas.get(0);
+			this.maquina = listaMaquinas.get(0);
 			AlimentoDAO alimentoDAO = new AlimentoDAO();
 			List<Alimento> listaAlimentos = alimentoDAO.getAlimentosValidos( maquina );
-			/*
-			Alimento alimento = listaAlimentos.get(0);
-			
-			VBox vbox = new VBox();
-			Button btn = new Button("botão 1");
-			GridPane.setRowIndex( vbox , 0 );
-			GridPane.setColumnIndex( vbox, 0 );
-			this.gpnGridAlimentos.add(vbox, 0, 0);
-			//btn.setMargin( new Insets( 0 , 0 , 0 , 0) );
-			//vbox.setPadding(new Insets(0,0,0,0) );
-			btn.setPrefWidth(230);
-			btn.setPrefHeight(90);
-			Label lbl = new Label("Preço do produto");
-			vbox.setAlignment(Pos.CENTER);
-			vbox.getChildren().addAll( btn, lbl );
-			vbox = new VBox();
-			this.gpnGridAlimentos.add(vbox,1 , 0);
-			vbox.getChildren().addAll( new Button("Botão Teste 2") );
-			*/
 			carregaAlimentosNoGrid( listaAlimentos );
 		}//END if( listaMaquinas.isEmpty == false
 	}// END carregaAlimentosDeMaquina
@@ -120,16 +106,20 @@ public class PainelAlimentosControle {
 		System.out.println( "Tamanho da lista: " + listaAlimentos.size());
 		int i = 0;
 		int k = 0;
+		//Enquanto não lista todos os alimentos
 		while( k < listaAlimentos.size() ){
+			//O iterador j 
 			for( int j = 0 ; j < MAX_COLUMNS && k < listaAlimentos.size() ; j++ ){
 				Alimento alimento = listaAlimentos.get( k );
 				double precoAlimento = alimento.getTipoAlimento().getPreco();
 				String nomeAlimento = alimento.getTipoAlimento().getNome();
 				VBox vBox = new VBox();
 				vBox.setAlignment( Pos.CENTER );
-				Button btnAlimento = new Button( nomeAlimento );
+				ButtonAlimento btnAlimento = new ButtonAlimento( nomeAlimento );
 				btnAlimento.setPrefWidth(230);
 				btnAlimento.setPrefHeight(90);
+				btnAlimento.setAlimento( alimento );
+				adicionarEventHandlerButtonAlimento( btnAlimento );
 				Label lblPreco = new Label("Preço: " + precoAlimento );
 				lblPreco.setPrefWidth( 230 );
 				vBox.getChildren().addAll( btnAlimento , lblPreco );
@@ -138,8 +128,27 @@ public class PainelAlimentosControle {
 			}// END for( int j = 0 ; j < MAX_COLUMNS ; ...
 			i++;
 		}// END while
-		
-	}
+	}// END carregaAlimentosNoGrid
+	
+	private void adicionarEventHandlerButtonAlimento( ButtonAlimento btnAlimento ){
+		btnAlimento.setOnAction( (event) -> {
+			ResultadoCompra resultadoCompra = 
+					this.compra.realizaCompra( this.maquina , btnAlimento.getAlimento() );
+			//Se o resultado da compra for bem sucedido
+			if( resultadoCompra == ResultadoCompra.CONCLUIDA ){
+				this.atualizaLabelSaldo();
+				System.out.println( "Compra concluída com sucesso!" );
+				System.out.println( btnAlimento.getAlimento().getTipoAlimento().getNome() 
+						+ " disponíveis: " + btnAlimento.getAlimento().getQuantidade() );
+			}else if( resultadoCompra == ResultadoCompra.SALDO_INSUFICIENTE ){
+				System.out.println( "Saldo insuficiente." );
+			}else if( resultadoCompra == ResultadoCompra.TROCO_INSUFICIENTE ){
+				System.out.println( "Troco indisponível." );
+			}else{
+				
+			}
+		});//END lambda setOnAction
+	}//END adicionarEventHandler
 	
 	/* ********************************************************************************/
 	 // GETs e SETs
