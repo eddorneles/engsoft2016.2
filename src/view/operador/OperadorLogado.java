@@ -58,7 +58,7 @@ public class OperadorLogado extends JFrame {
 		
 		JTextPane txtpnListaDeOpes = new JTextPane();
 		txtpnListaDeOpes.setBounds(5, 5, 438, 21);
-		txtpnListaDeOpes.setText("Selecione uma máquina");
+		txtpnListaDeOpes.setText("Logado como: " + operador.getNome() + "     -     Selecione uma máquina");
 		contentPane.add(txtpnListaDeOpes);
 		
 		JButton voltarTelaAnterior = new JButton("Sair");

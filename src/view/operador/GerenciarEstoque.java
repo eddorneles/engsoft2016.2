@@ -31,7 +31,11 @@ public class GerenciarEstoque extends JFrame {
 	private JPanel panel;
 	private JButton voltarTelaAnterior;
 	private JLabel lblSemProdutosCadastrados;
+<<<<<<< HEAD
 	private JTextField textField;
+=======
+	private Alimento alimento;
+>>>>>>> develop
 
 	/**
 	 * Launch the application.
@@ -80,9 +84,13 @@ public class GerenciarEstoque extends JFrame {
 		lblAdicionarSaldo.setBounds(145, 12, 149, 15);
 		panel.add(lblAdicionarSaldo);
 		
+<<<<<<< HEAD
 		JButton button = new JButton("Reabastecer");
 		button.setBounds(75, 216, 137, 25);
 		panel.add(button);
+=======
+		
+>>>>>>> develop
 		
 		
 		//MaquinaDAO maquinaDAO = new MaquinaDAO();
@@ -93,11 +101,27 @@ public class GerenciarEstoque extends JFrame {
 		List<Alimento> alimentos = alimentoDAO.getAlimentosValidos(opMaq.getMaquina());
 		if(alimentos.isEmpty()){
 			System.out.println("Nenhuma alimento na validade na máquina");
+<<<<<<< HEAD
 			lblSemProdutosCadastrados = new JLabel("Sem produtos cadastrados na máquina");
 			lblSemProdutosCadastrados.setBounds(75, 108, 303, 15);
 			panel.add(lblSemProdutosCadastrados);
 		}
 		else{
+=======
+			lblSemProdutosCadastrados = new JLabel("Nenhuma alimento na validade na máquina");
+			lblSemProdutosCadastrados.setBounds(70, 108, 310, 15);
+			panel.add(lblSemProdutosCadastrados);
+		}
+		else{
+			JButton button = new JButton("Reabastecer");
+			button.setBounds(75, 216, 137, 25);
+			panel.add(button);
+			
+			/* instancia vetor de TextField */
+			JTextField[] vetorAlimento;
+			vetorAlimento = new JTextField[alimentos.size()];
+			
+>>>>>>> develop
 			for(int i=0; i<alimentos.size(); i++){
 				System.out.printf("Produto: %d, NOME: %s, Preço: %.2f\n",
 						i, alimentos.get(i).getTipoAlimento().getNome(), alimentos.get(i).getTipoAlimento().getPreco());
@@ -106,6 +130,7 @@ public class GerenciarEstoque extends JFrame {
 				label.setBounds(90, 50 + 30*i, 220 +20, 20);
 				panel.add(label);
 				
+<<<<<<< HEAD
 				String provisorio;
 				provisorio = "alimento" + i;
 				
@@ -126,6 +151,60 @@ public class GerenciarEstoque extends JFrame {
 			}
 		}
 		
+=======
+				
+				vetorAlimento[i] = new JTextField("0");
+				vetorAlimento[i].setBounds(280, 54 + 30*i, 114, 19);
+				
+				//alimento0.setName(provisorio);
+				//System.out.println(provisorio);
+				panel.add(vetorAlimento[i]);
+				vetorAlimento[i].setColumns(10);
+				
+				if(alimentos.get(i).getQuantidade() == 1){
+					vetorAlimento[i].setToolTipText(Integer.toString(alimentos.get(i).getQuantidade()) + " alimento");
+				}
+				else{
+					vetorAlimento[i].setToolTipText(Integer.toString(alimentos.get(i).getQuantidade()) + " alimentos");
+				}	
+			}
+			
+			
+			/* action listener do botão reabastecer */
+			button.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					for(int i=0; i<alimentos.size(); i++){
+						/* atualiza alimentos na máquina */
+						alimentos.get(i).setQuantidade(alimentos.get(i).getQuantidade() + Integer.valueOf(vetorAlimento[i].getText()));
+						
+						/* atualiza alimentos no banco */
+						
+						alimento = alimentos.get(i);
+						alimentoDAO.atualizaQuantidade(alimento);
+						panel.setVisible(false);
+						alert.setVisible(true);
+					}
+					
+				}
+			});
+			
+			
+		}
+		
+		alert = new JPanel();
+		alert.setBounds(0, 0, 432, 253);
+		contentPane.add(alert);
+		/*coloca a janela de sucesso invisivel. Essa janela so vai se tornar visivel quando
+		'Reabastecer' for clicado*/
+		alert.setVisible(false);
+		alert.setLayout(null);
+		
+		lblSucesso = new JLabel("Sucesso!");
+		lblSucesso.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSucesso.setBounds(101, 61, 226, 99);
+		alert.add(lblSucesso);
+		
+>>>>>>> develop
 		
 		
 		voltarTelaAnterior = new JButton("Voltar");
@@ -140,9 +219,13 @@ public class GerenciarEstoque extends JFrame {
 		lblQuantidade.setBounds(291, 27, 91, 15);
 		panel.add(lblQuantidade);
 		
+<<<<<<< HEAD
 		
 		
 		
+=======
+
+>>>>>>> develop
 		
 		alert = new JPanel();
 		alert.setBounds(0, 0, 432, 253);
@@ -170,6 +253,7 @@ public class GerenciarEstoque extends JFrame {
 		
 		btnVoltar.setBounds(169, 155, 97, 25);
 		alert.add(btnVoltar);
+<<<<<<< HEAD
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//String alimento_bd;
@@ -202,6 +286,9 @@ public class GerenciarEstoque extends JFrame {
 				alert.setVisible(true);*/
 			}
 		});
+=======
+		
+>>>>>>> develop
 		
 		voltarTelaAnterior.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
