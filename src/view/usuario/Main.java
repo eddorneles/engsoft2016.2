@@ -92,10 +92,6 @@ public class Main extends Application {
 		}
 	}
 	
-	private void apresentaSaldo(){
-		
-	}
-	
 	public Compra getCompra(){
 		return this.compra;
 	}
