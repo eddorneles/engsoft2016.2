@@ -20,10 +20,12 @@ import dao.OperadorMaquinaDAO;
 import dominio.Alimento;
 import dominio.Maquina;
 import dominio.Operador;
+import dominio.OperadorMaquina;
 
 public class OperadorLogado extends JFrame {
 
 	private JPanel contentPane;
+	private Operador operador;
 
 	/**
 	 * Launch the application.
@@ -45,6 +47,7 @@ public class OperadorLogado extends JFrame {
 	 * Create the frame.
 	 */
 	public OperadorLogado(Operador operador) {
+		this.operador = operador;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -57,6 +60,10 @@ public class OperadorLogado extends JFrame {
 		txtpnListaDeOpes.setBounds(5, 5, 438, 21);
 		txtpnListaDeOpes.setText("Selecione uma máquina");
 		contentPane.add(txtpnListaDeOpes);
+		
+		JButton voltarTelaAnterior = new JButton("Sair");
+		voltarTelaAnterior.setBounds(330, 220, 85, 30);
+		contentPane.add(voltarTelaAnterior, BorderLayout.NORTH);
 		
 		OperadorMaquinaDAO opMDAO = new OperadorMaquinaDAO();
 		List <Maquina> maquinasOperador = opMDAO.getAllMaquinaOperador(operador);
@@ -78,8 +85,16 @@ public class OperadorLogado extends JFrame {
 						
 						/* pega objeto máquina para enviar à prox. classe */
 						for(int i=0; i<maquinasOperador.size(); i++){
-							if(Integer.parseInt(btnOpao.getName()) == maquinasOperador.get(i).getId())
-							System.out.print("It's a match!");
+							if(Integer.parseInt(btnOpao.getName()) == maquinasOperador.get(i).getId()){
+								System.out.print("It's a match!");
+								OperadorMaquina opMaq = new OperadorMaquina();
+								opMaq.setMaquina(maquinasOperador.get(i));
+								opMaq.setOperador(OperadorLogado.this.operador);
+								
+								OperadorMaquinaMain main = new OperadorMaquinaMain(opMaq);
+								main.setVisible(true);
+								CloseFrame();
+							}
 							Maquina maquinaProx = maquinasOperador.get(i);
 							//chama próx função
 							//CloseFrame();//fecha frame atual
@@ -91,6 +106,15 @@ public class OperadorLogado extends JFrame {
 					}
 				});
 			}
+			voltarTelaAnterior.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e){
+					System.out.println("voltar clicado!");
+					OperadorLogado.this.setVisible(false);
+					HomeOperador frame = new HomeOperador();
+					frame.setVisible(true);
+					
+				}
+			});
 		}
 		else{
 			System.out.println("Operador não tem acesso a alguma máquina");
