@@ -117,24 +117,27 @@ public class PainelAlimentosControle {
 	}// END carregaAlimentosDeMaquina
 	
 	private void carregaAlimentosNoGrid( List<Alimento> listaAlimentos ){
-		for( int i = 0 ; i < listaAlimentos.size() ; i++ ){
-			for( int j = 0 ; j < MAX_COLUMNS ; j++ ){
-				Alimento alimento = listaAlimentos.get( i );
+		System.out.println( "Tamanho da lista: " + listaAlimentos.size());
+		int i = 0;
+		int k = 0;
+		while( k < listaAlimentos.size() ){
+			for( int j = 0 ; j < MAX_COLUMNS && k < listaAlimentos.size() ; j++ ){
+				Alimento alimento = listaAlimentos.get( k );
 				double precoAlimento = alimento.getTipoAlimento().getPreco();
 				String nomeAlimento = alimento.getTipoAlimento().getNome();
 				VBox vBox = new VBox();
 				vBox.setAlignment( Pos.CENTER );
-				Button btnAlimento = new Button( listaAlimentos.get(i).getTipoAlimento().getNome() );
+				Button btnAlimento = new Button( nomeAlimento );
 				btnAlimento.setPrefWidth(230);
 				btnAlimento.setPrefHeight(90);
-				Label lblPreco = new Label("Preço: " + (
-							listaAlimentos.get( i ).getTipoAlimento().getPreco() ) );
+				Label lblPreco = new Label("Preço: " + precoAlimento );
 				lblPreco.setPrefWidth( 230 );
 				vBox.getChildren().addAll( btnAlimento , lblPreco );
 				this.gpnGridAlimentos.add( vBox , j, i );
-				
+				k++;
 			}// END for( int j = 0 ; j < MAX_COLUMNS ; ...
-		}
+			i++;
+		}// END while
 		
 	}
 	
