@@ -135,8 +135,8 @@
                   </HBox>
                   <Pane prefHeight="313.0" prefWidth="148.0">
                      <children>
-                        <Button layoutY="96.0" mnemonicParsing="false" onAction="#handleBtnInserir" prefHeight="26.0" prefWidth="68.0" text="Inserir" />
-                        <Button layoutX="68.0" layoutY="96.0" mnemonicParsing="false" onAction="#fechar" text="Cancelar" />
+                        <Button layoutX="80.0" layoutY="96.0" mnemonicParsing="false" onAction="#handleBtnInserir" prefHeight="26.0" prefWidth="68.0" text="Inserir" />
+                        <Button layoutY="96.0" mnemonicParsing="false" onAction="#fechar" text="Cancelar" />
                      </children>
                   </Pane>
                </children>

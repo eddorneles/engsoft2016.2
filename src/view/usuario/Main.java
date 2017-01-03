@@ -2,8 +2,11 @@ package view.usuario;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
+import dao.MaquinaDAO;
 import def.TipoDinheiro;
+import dominio.Maquina;
 import javafx.application.Application;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -52,6 +55,7 @@ public class Main extends Application {
 			rootLayout.setCenter( painelAlimentos );
 			
 			PainelAlimentosControle ctrlPainelAlimentos = loader.getController();
+			ctrlPainelAlimentos.carregaAlimentosDeMaquina();
 			ctrlPainelAlimentos.setMain( this );
 			
 		}catch( IOException e){
@@ -85,6 +89,13 @@ public class Main extends Application {
 		}catch( IOException e ){
 			e.printStackTrace();
 		}
+	}
+	
+	public void carregaAlimentos(){
+		MaquinaDAO maquinaDAO = new MaquinaDAO();
+		List<Maquina> maquinas = maquinaDAO.getAllMaquinasWithProducts();
+		
+		
 	}
 	
 	private void apresentaSaldo(){
