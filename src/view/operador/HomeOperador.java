@@ -57,13 +57,13 @@ public class HomeOperador extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		TextField login = new TextField();
-		login.setText("Login");
-		login.setBounds(24, 41, 386, 38);
+		//login.setText("Login");
+		login.setBounds(85, 37, 325, 29);
 		contentPane.add(login);
 		
 		TextField senha = new TextField();
-		senha.setText("Senha");
-		senha.setBounds(24, 93, 386, 38);
+		//senha.setText("Senha");
+		senha.setBounds(85, 93, 325, 29);
 		contentPane.add(senha);
 		
 		
@@ -99,6 +99,14 @@ public class HomeOperador extends JFrame {
 		});
 		btnEntrar.setBounds(24, 168, 108, 53);
 		contentPane.add(btnEntrar);
+		
+		JLabel lblNewLabel_1 = new JLabel("Login:");
+		lblNewLabel_1.setBounds(24, 51, 53, 15);
+		contentPane.add(lblNewLabel_1);
+		
+		JLabel lblSenha = new JLabel("Senha:");
+		lblSenha.setBounds(24, 103, 53, 15);
+		contentPane.add(lblSenha);
 		
 	}
 	public void CloseFrame(){
