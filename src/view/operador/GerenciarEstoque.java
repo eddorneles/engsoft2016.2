@@ -31,7 +31,7 @@ public class GerenciarEstoque extends JFrame {
 	private JPanel panel;
 	private JButton voltarTelaAnterior;
 	private JLabel lblSemProdutosCadastrados;
-	private JTextField textField;
+	private Alimento alimento;
 
 	/**
 	 * Launch the application.
@@ -100,29 +100,9 @@ public class GerenciarEstoque extends JFrame {
 			button.setBounds(75, 216, 137, 25);
 			panel.add(button);
 			
-			/* action listener do botão reabastecer */
-			button.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					//String alimento_bd;
-					for(int i=0; i<alimentos.size(); i++){
-						//alimento_bd = "alimento" + i;
-						
-						//alimentos.get(i).setQuantidade(Integer.valueOf(alimento1.getText()));
-						//maquina.setCinCent(Integer.valueOf(qtdeCinCent.getText()) + opMaq.getMaquina().getCinCent());
-					}
-					/* substituir por métodos equivalentes para esta classe */
-					/*MaquinaDAO maquinaDAO = new MaquinaDAO();
-					maquina.setCinCent(Integer.valueOf(qtdeCinCent.getText()) + opMaq.getMaquina().getCinCent());
-					maquina.setId(opMaq.getMaquina().getId());
-					//atualiza a maquina no objeto OperadorMaquina
-					GerenciarEstoque.this.operadorMaquina.setMaquina(maquina);
-					
-					//DESCOMENTAR LINHA ABAIXO PARA ATUALIZACAO NO BANCO
-					maquinaDAO.updateMaquina(maquina);
-					panel.setVisible(false);
-					alert.setVisible(true);*/
-				}
-			});
+			/* instancia vetor de TextField */
+			JTextField[] vetorAlimento;
+			vetorAlimento = new JTextField[alimentos.size()];
 			
 			for(int i=0; i<alimentos.size(); i++){
 				System.out.printf("Produto: %d, NOME: %s, Preço: %.2f\n",
@@ -132,25 +112,57 @@ public class GerenciarEstoque extends JFrame {
 				label.setBounds(90, 50 + 30*i, 220 +20, 20);
 				panel.add(label);
 				
-				String provisorio;
-				provisorio = "alimento" + i;
 				
-				textField = new JTextField("0");
-				textField.setBounds(280, 54 + 30*i, 114, 19);
+				vetorAlimento[i] = new JTextField("0");
+				vetorAlimento[i].setBounds(280, 54 + 30*i, 114, 19);
 				
-				//textField.setName(provisorio);
+				//alimento0.setName(provisorio);
 				//System.out.println(provisorio);
-				panel.add(textField);
-				textField.setColumns(10);
+				panel.add(vetorAlimento[i]);
+				vetorAlimento[i].setColumns(10);
 				
 				if(alimentos.get(i).getQuantidade() == 1){
-					textField.setToolTipText(Integer.toString(alimentos.get(i).getQuantidade()) + " alimento");
+					vetorAlimento[i].setToolTipText(Integer.toString(alimentos.get(i).getQuantidade()) + " alimento");
 				}
 				else{
-					textField.setToolTipText(Integer.toString(alimentos.get(i).getQuantidade()) + " alimentos");
+					vetorAlimento[i].setToolTipText(Integer.toString(alimentos.get(i).getQuantidade()) + " alimentos");
 				}	
 			}
+			
+			
+			/* action listener do botão reabastecer */
+			button.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					for(int i=0; i<alimentos.size(); i++){
+						/* atualiza alimentos na máquina */
+						alimentos.get(i).setQuantidade(alimentos.get(i).getQuantidade() + Integer.valueOf(vetorAlimento[i].getText()));
+						
+						/* atualiza alimentos no banco */
+						
+						alimento = alimentos.get(i);
+						alimentoDAO.atualizaQuantidade(alimento);
+						panel.setVisible(false);
+						alert.setVisible(true);
+					}
+					
+				}
+			});
+			
+			
 		}
+		
+		alert = new JPanel();
+		alert.setBounds(0, 0, 432, 253);
+		contentPane.add(alert);
+		/*coloca a janela de sucesso invisivel. Essa janela so vai se tornar visivel quando
+		'Reabastecer' for clicado*/
+		alert.setVisible(false);
+		alert.setLayout(null);
+		
+		lblSucesso = new JLabel("Sucesso!");
+		lblSucesso.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSucesso.setBounds(101, 61, 226, 99);
+		alert.add(lblSucesso);
 		
 		
 		
@@ -166,9 +178,7 @@ public class GerenciarEstoque extends JFrame {
 		lblQuantidade.setBounds(291, 27, 91, 15);
 		panel.add(lblQuantidade);
 		
-		
-		
-		
+
 		
 		alert = new JPanel();
 		alert.setBounds(0, 0, 432, 253);
