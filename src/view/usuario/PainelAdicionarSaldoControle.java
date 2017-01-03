@@ -218,7 +218,7 @@ public class PainelAdicionarSaldoControle {
 		cedulasInseridas.put( TipoDinheiro.DEZ_REAIS, Integer.parseInt( txtDezReal.getText() ) );
 		
 		this.cedulasSaldo = cedulasInseridas;
-		iniciaCompra();
+		this.iniciaCompra();
 		stageAdicionarSaldo.close();
 		return true;
 	}

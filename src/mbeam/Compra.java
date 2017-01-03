@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.joda.time.DateTime;
 
-
+import def.ResultadoCompra;
 import def.TipoDinheiro;
 
 public class Compra {
@@ -48,6 +48,40 @@ public class Compra {
 		}//END if valor_dinheiro >= alimento.getTipo ...
 		return false;
 	}// END realizaCompra
+	
+	public ResultadoCompra realizaCompra( Maquina maquina , Alimento alimento ){
+		
+		double saldo = calculaSaldo();
+		//Se o saldo_inserido for maior ou igual ao preco, então a compra pode ocorrer
+		if ( saldo >= alimento.getTipoAlimento().getPreco() ){
+			HashMap<TipoDinheiro,Integer> mapTroco = calcularTroco( maquina, alimento , saldo );
+			
+			if( mapTroco != null ){
+				
+				AlimentoDAO alimentoDAO = new AlimentoDAO();
+				//Se houver algum alimento na bandeja
+				if(alimento.getQuantidade() > 0 ){
+					alimento.setQuantidade( alimento.getQuantidade() - 1 );
+					alimentoDAO.atualizaQuantidade( alimento );
+				}
+				double novoSaldoMaquina = maquina.getDinheiroVendas() + alimento.getTipoAlimento().getPreco();
+				maquina.setDinheiroVendas( novoSaldoMaquina );
+				MaquinaDAO maquinaDAO = new MaquinaDAO();
+				maquinaDAO.updateMaquina(maquina);
+				this.setTroco(mapTroco);
+				this.zeraSaldo();
+				return ResultadoCompra.CONCLUIDA;
+			}
+			return ResultadoCompra.TROCO_INSUFICIENTE;
+		}//END if valor_dinheiro >= alimento.getTipo ...
+		return ResultadoCompra.SALDO_INSUFICIENTE;
+	}// END realizaCompra
+	
+	public void zeraSaldo(){
+		for( Map.Entry<TipoDinheiro, Integer> entry : this.mapDinheiroInserido.entrySet() ){
+			entry.setValue( 0 );
+		}
+	}
 	
 	public double calculaSaldo(){
 		double saldo = 0.0;

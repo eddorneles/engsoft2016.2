@@ -16,4 +16,4 @@ public enum TipoDinheiro {
 	TipoDinheiro( double v ){
 		this.value = v;
 	}
-}
+}//END enum TipoDinheiro
