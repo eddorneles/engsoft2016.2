@@ -169,7 +169,7 @@ public class PainelAlimentosControle {
 	
 	private void apresentaMensagemCompraConcluida(){
 		String mensagem = "COMPRA CONCLUÍDA!\n"; 
-		mensagem += "Valor do troco: " + Double.toString(this.compra.getValorTroco() ) + "\n\n";
+		mensagem += "Valor do troco: " + Double.toString(this.compra.getValorTroco() ) + "0\n\n";
 		HashMap<TipoDinheiro, Integer> troco = this.compra.getTroco();
 		mensagem += "Moedas de Cinquenta Centavos: " + 
 				Integer.toString( troco.get(TipoDinheiro.CINQUENTA_CENTAVOS) ) + "\n";
