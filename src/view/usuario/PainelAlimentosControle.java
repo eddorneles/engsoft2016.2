@@ -1,6 +1,7 @@
 package view.usuario;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javafx.event.ActionEvent;
@@ -20,6 +21,7 @@ import mbeam.Compra;
 import dao.AlimentoDAO;
 import dao.MaquinaDAO;
 import def.ResultadoCompra;
+import def.TipoDinheiro;
 import dominio.Alimento;
 import dominio.Maquina;
 import view.usuario.extended.ButtonAlimento;
@@ -40,6 +42,8 @@ public class PainelAlimentosControle {
 	@FXML
 	private Label lblSaldo;
 	@FXML
+	private Label lblInfo;
+	@FXML
 	private GridPane gpnGridAlimentos;
 	
 	
@@ -48,11 +52,11 @@ public class PainelAlimentosControle {
 	
 
 	/* MÉTODOS FXML */
-	/* 
-	 * Método é automaticamente chamado após o arquivo 
+	
+	 
+	/* Método é automaticamente chamado após o arquivo 
 	 * fxml ser carregado
 	 * */
-	
 	@FXML
 	private void initialize(){
 		
@@ -73,7 +77,7 @@ public class PainelAlimentosControle {
 			double saldo = compra.calculaSaldo();
 			this.lblSaldo.setText( Double.toString( saldo ) + "0" );
 		}else{
-			this.lblSaldo.setText( "---" );
+			this.lblSaldo.setText( "0.00" );
 		}
 	}// END atualizaLabelSaldo
 	
@@ -82,11 +86,7 @@ public class PainelAlimentosControle {
 		this.main.cancelaCompra();
 		this.atualizaLabelSaldo();
 	}
-	
-	@FXML
-	private void apresentaProdutos(){
-		
-	}
+
 	//END MÉTODOS FXML
 	/* ********************************************************************************/
 	// OUTROS MÉTODOS
@@ -103,7 +103,6 @@ public class PainelAlimentosControle {
 	}// END carregaAlimentosDeMaquina
 	
 	private void carregaAlimentosNoGrid( List<Alimento> listaAlimentos ){
-		System.out.println( "Tamanho da lista: " + listaAlimentos.size());
 		int i = 0;
 		int k = 0;
 		//Enquanto não lista todos os alimentos
@@ -134,21 +133,54 @@ public class PainelAlimentosControle {
 		btnAlimento.setOnAction( (event) -> {
 			ResultadoCompra resultadoCompra = 
 					this.compra.realizaCompra( this.maquina , btnAlimento.getAlimento() );
-			//Se o resultado da compra for bem sucedido
-			if( resultadoCompra == ResultadoCompra.CONCLUIDA ){
-				this.atualizaLabelSaldo();
-				System.out.println( "Compra concluída com sucesso!" );
-				System.out.println( btnAlimento.getAlimento().getTipoAlimento().getNome() 
-						+ " disponíveis: " + btnAlimento.getAlimento().getQuantidade() );
-			}else if( resultadoCompra == ResultadoCompra.SALDO_INSUFICIENTE ){
-				System.out.println( "Saldo insuficiente." );
-			}else if( resultadoCompra == ResultadoCompra.TROCO_INSUFICIENTE ){
-				System.out.println( "Troco indisponível." );
-			}else{
-				
-			}
+			apresentaResultadoCompra( resultadoCompra );
 		});//END lambda setOnAction
 	}//END adicionarEventHandler
+	
+	private void apresentaResultadoCompra( ResultadoCompra resultadoCompra ){
+		//Se o resultado da compra for bem sucedido
+		if( resultadoCompra == ResultadoCompra.CONCLUIDA ){
+			this.atualizaLabelSaldo();
+			this.apresentaMensagemCompraConcluida();
+		}else if( resultadoCompra == ResultadoCompra.SALDO_INSUFICIENTE ){
+			System.out.println( "Saldo insuficiente." );
+			this.apresentaMensagemSaldoInsuficiente();
+		}else if( resultadoCompra == ResultadoCompra.TROCO_INSUFICIENTE ){
+			System.out.println( "Troco indisponível." );
+			this.apresentaMensagemTrocoInsuficiente();
+		}else{
+			//Produto indisponível
+		}
+	}
+	
+	private void apresentaMensagemSaldoInsuficiente(){
+		String mensagem = "NÃO FOI POSSÍVEL CONCLUIR A COMPRA!\n";
+		mensagem += "SALDO INSUFICIENTE\n";
+		mensagem += "INSIRA MAIS DINHEIRO";
+		this.lblInfo.setText( mensagem );
+	}
+	
+	private void apresentaMensagemTrocoInsuficiente(){
+		String mensagem = "NÃO FOI POSSÍVEL CONCLUIR A COMPRA!\n";
+		mensagem += "A máquina não dispõe de troco suficiente para seu pedido.\n";
+
+		this.lblInfo.setText( mensagem );
+	}
+	
+	private void apresentaMensagemCompraConcluida(){
+		String mensagem = "COMPRA CONCLUÍDA!\n"; 
+		mensagem += "Valor do troco: " + Double.toString(this.compra.getValorTroco() ) + "\n\n";
+		HashMap<TipoDinheiro, Integer> troco = this.compra.getTroco();
+		mensagem += "Moedas de Cinquenta Centavos: " + 
+				Integer.toString( troco.get(TipoDinheiro.CINQUENTA_CENTAVOS) ) + "\n";
+		mensagem += "Moedas de Um Real: " + 
+				Integer.toString( troco.get(TipoDinheiro.UM_REAL) ) + "\n";
+		mensagem += "Cédulas de Dois Reais: " + 
+				Integer.toString( troco.get(TipoDinheiro.DOIS_REAIS ) ) + "\n";
+		mensagem += "Cédulas de Cinco Reais: " + 
+				Integer.toString( troco.get(TipoDinheiro.CINCO_REAIS ) );
+		this.lblInfo.setText( mensagem );
+	}
 	
 	/* ********************************************************************************/
 	 // GETs e SETs
