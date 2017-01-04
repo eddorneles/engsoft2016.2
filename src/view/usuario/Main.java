@@ -3,16 +3,19 @@ package view.usuario;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import dao.MaquinaDAO;
 import def.TipoDinheiro;
 import dominio.Maquina;
+
 import javafx.application.Application;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import mbeam.Compra;
 import javafx.scene.Scene;
-
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;

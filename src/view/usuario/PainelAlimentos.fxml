@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.usuario.PainelAlimentosControle">
    <children>
@@ -32,14 +33,23 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <VBox layoutY="14.0" prefHeight="247.0" prefWidth="218.0" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
+                  <VBox layoutY="14.0" prefHeight="382.0" prefWidth="333.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
                      <children>
-                        <AnchorPane prefHeight="259.0" prefWidth="237.0">
+                        <AnchorPane prefHeight="259.0" prefWidth="333.0">
                            <children>
                               <Button layoutY="67.0" mnemonicParsing="false" onAction="#handleBtnAdicionarSaldo" prefHeight="26.0" prefWidth="237.0" text="Adicionar Saldo" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                              <Label fx:id="lblSaldo" layoutY="16.0" prefHeight="33.0" prefWidth="237.0" text="---" />
+                              <Label fx:id="lblSaldo" layoutY="16.0" prefHeight="33.0" prefWidth="237.0" text="0.00" />
                               <Label text="SALDO" />
                               <Button layoutY="117.0" mnemonicParsing="false" onAction="#handleBtnCancelarCompra" prefHeight="26.0" prefWidth="224.0" text="Cancelar Compra" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="300.0" prefWidth="335.0">
+                           <children>
+                              <Label alignment="CENTER" layoutX="14.0" layoutY="20.0" prefHeight="35.0" prefWidth="300.0" text="STATUS" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font></Label>
+                              <Label fx:id="lblInfo" layoutX="15.0" layoutY="55.0" prefHeight="144.0" prefWidth="303.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
                            </children>
                         </AnchorPane>
                      </children>

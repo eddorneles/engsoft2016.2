@@ -53,8 +53,8 @@ public class Compra {
 	}// END realizaCompra
 	
 	public ResultadoCompra realizaCompra( Maquina maquina , Alimento alimento ){
-		
 		double saldo = calculaSaldo();
+		System.out.println( "Saldo é " + saldo );
 		//Se o saldo_inserido for maior ou igual ao preco, então a compra pode ocorrer
 		if ( saldo >= alimento.getTipoAlimento().getPreco() ){
 			HashMap<TipoDinheiro,Integer> mapTroco = calcularTroco( maquina, alimento , saldo );
@@ -159,7 +159,7 @@ public class Compra {
 			mapTroco.put( TipoDinheiro.UM_REAL, moedasUmReal );
 			mapTroco.put( TipoDinheiro.CINQUENTA_CENTAVOS, (int) moedasCinCentavos );
 			mapTroco.put( TipoDinheiro.DOIS_REAIS, cedulasDoisReal );
-			
+			this.troco = mapTroco;
 			return mapTroco;
 		}
 		/*Se não houver cedulas ou moedas suficientes para troco, então não é possível gerar troco, 
@@ -167,12 +167,11 @@ public class Compra {
 		 */
 		return null;	
 	}
-
-	private boolean verificaValidadeAlimento( Alimento alimento , Maquina maquina ){
-		
-		return false;
-	}
 	
+	/*****************************************************************************
+	 * MÉTODOS GETs e SETs
+	 * 
+	 */
 	public double getSaldoInserido() {
 		return saldoInserido;
 	}
@@ -184,8 +183,6 @@ public class Compra {
 	public void setDinheiroInserido( HashMap<TipoDinheiro, Integer> dinheiroInserido){
 		this.mapDinheiroInserido = dinheiroInserido;
 	}
-	
-
 
 	public void setSaldoInserido(double saldoInserido) {
 		this.saldoInserido = saldoInserido;
@@ -197,6 +194,14 @@ public class Compra {
 	
 	public HashMap<TipoDinheiro, Integer> getTroco(){
 		return troco;
+	}
+	
+	public double getValorTroco(){
+		double valorTroco = 0.0;
+		for( Map.Entry<TipoDinheiro, Integer> entry : this.troco.entrySet() ){
+			valorTroco += ( entry.getValue() * entry.getKey().get() );
+		}
+		return valorTroco;
 	}
 	
 	/*
