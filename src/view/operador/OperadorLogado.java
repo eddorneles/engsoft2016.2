@@ -21,6 +21,7 @@ import dominio.Alimento;
 import dominio.Maquina;
 import dominio.Operador;
 import dominio.OperadorMaquina;
+import javax.swing.JLabel;
 
 public class OperadorLogado extends JFrame {
 
@@ -59,11 +60,17 @@ public class OperadorLogado extends JFrame {
 		JTextPane txtpnListaDeOpes = new JTextPane();
 		txtpnListaDeOpes.setBounds(5, 5, 438, 21);
 		txtpnListaDeOpes.setText("Logado como: " + operador.getNome() + "     -     Selecione uma máquina");
-		contentPane.add(txtpnListaDeOpes);
+		contentPane.add(txtpnListaDeOpes, BorderLayout.CENTER);
 		
 		JButton voltarTelaAnterior = new JButton("Sair");
+		voltarTelaAnterior.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		voltarTelaAnterior.setBounds(330, 220, 85, 30);
 		contentPane.add(voltarTelaAnterior, BorderLayout.NORTH);
+		
+		
 		
 		OperadorMaquinaDAO opMDAO = new OperadorMaquinaDAO();
 		List <Maquina> maquinasOperador = opMDAO.getAllMaquinaOperador(operador);
@@ -106,19 +113,24 @@ public class OperadorLogado extends JFrame {
 					}
 				});
 			}
-			voltarTelaAnterior.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e){
-					System.out.println("voltar clicado!");
-					OperadorLogado.this.setVisible(false);
-					HomeOperador frame = new HomeOperador();
-					frame.setVisible(true);
-					
-				}
-			});
+			
 		}
 		else{
 			System.out.println("Operador não tem acesso a alguma máquina");
+			JLabel lblEsteOperadorNo = new JLabel("Este operador não tem nenhuma máquina!");
+			lblEsteOperadorNo.setBounds(60, 120, 330, 30);
+			contentPane.add(lblEsteOperadorNo, BorderLayout.SOUTH);
 		}
+		
+		voltarTelaAnterior.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				System.out.println("voltar clicado!");
+				OperadorLogado.this.setVisible(false);
+				HomeOperador frame = new HomeOperador();
+				frame.setVisible(true);
+				
+			}
+		});
 			
            
 			
