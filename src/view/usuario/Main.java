@@ -22,16 +22,16 @@ import javafx.scene.layout.BorderPane;
 
 public class Main extends Application {
 
-	private Stage primaryStage;
-	private BorderPane rootLayout;
-	private Compra compra;
+    private Stage primaryStage;
+    private BorderPane rootLayout;
+    private Compra compra;
 	//private HashMap<TipoDinheiro, Integer> mapDinheiroSaldo;
-	
-	@Override
-	public void start( Stage primaryStage ) {
+
+        @Override
+        public void start( Stage primaryStage ) {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle( "Máquina de Alimentos" );
-				
+
 		initRootLayout();
 		apresentaProdutos();
 	}
@@ -51,18 +51,17 @@ public class Main extends Application {
 	}//END initRootLayout
 	
 	public void apresentaProdutos(){
-		try{
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation( Main.class.getResource( "PainelAlimentos.fxml" ) );
-			AnchorPane painelAlimentos = (AnchorPane) loader.load();
-			rootLayout.setCenter( painelAlimentos );
-			
-			PainelAlimentosControle ctrlPainelAlimentos = loader.getController();
-			ctrlPainelAlimentos.carregaAlimentosDeMaquina();
-			ctrlPainelAlimentos.setMain( this );
-			
-		}catch( IOException e){
-			e.printStackTrace();
+	    try{
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation( Main.class.getResource( "PainelAlimentos.fxml" ) );
+            AnchorPane painelAlimentos = (AnchorPane) loader.load();
+            rootLayout.setCenter( painelAlimentos );
+            
+            PainelAlimentosControle ctrlPainelAlimentos = loader.getController();
+            ctrlPainelAlimentos.carregaAlimentosDeMaquina();
+            ctrlPainelAlimentos.setMain( this );
+        }catch( IOException e){
+            e.printStackTrace();
 		}
 	}
 	

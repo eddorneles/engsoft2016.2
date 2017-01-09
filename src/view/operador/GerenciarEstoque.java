@@ -31,11 +31,8 @@ public class GerenciarEstoque extends JFrame {
 	private JPanel panel;
 	private JButton voltarTelaAnterior;
 	private JLabel lblSemProdutosCadastrados;
-<<<<<<< HEAD
-	private JTextField textField;
-=======
 	private Alimento alimento;
->>>>>>> develop
+
 
 	/**
 	 * Launch the application.
@@ -84,13 +81,7 @@ public class GerenciarEstoque extends JFrame {
 		lblAdicionarSaldo.setBounds(145, 12, 149, 15);
 		panel.add(lblAdicionarSaldo);
 		
-<<<<<<< HEAD
-		JButton button = new JButton("Reabastecer");
-		button.setBounds(75, 216, 137, 25);
-		panel.add(button);
-=======
 		
->>>>>>> develop
 		
 		
 		//MaquinaDAO maquinaDAO = new MaquinaDAO();
@@ -101,13 +92,6 @@ public class GerenciarEstoque extends JFrame {
 		List<Alimento> alimentos = alimentoDAO.getAlimentosValidos(opMaq.getMaquina());
 		if(alimentos.isEmpty()){
 			System.out.println("Nenhuma alimento na validade na máquina");
-<<<<<<< HEAD
-			lblSemProdutosCadastrados = new JLabel("Sem produtos cadastrados na máquina");
-			lblSemProdutosCadastrados.setBounds(75, 108, 303, 15);
-			panel.add(lblSemProdutosCadastrados);
-		}
-		else{
-=======
 			lblSemProdutosCadastrados = new JLabel("Nenhuma alimento na validade na máquina");
 			lblSemProdutosCadastrados.setBounds(70, 108, 310, 15);
 			panel.add(lblSemProdutosCadastrados);
@@ -121,7 +105,6 @@ public class GerenciarEstoque extends JFrame {
 			JTextField[] vetorAlimento;
 			vetorAlimento = new JTextField[alimentos.size()];
 			
->>>>>>> develop
 			for(int i=0; i<alimentos.size(); i++){
 				System.out.printf("Produto: %d, NOME: %s, Preço: %.2f\n",
 						i, alimentos.get(i).getTipoAlimento().getNome(), alimentos.get(i).getTipoAlimento().getPreco());
@@ -130,28 +113,6 @@ public class GerenciarEstoque extends JFrame {
 				label.setBounds(90, 50 + 30*i, 220 +20, 20);
 				panel.add(label);
 				
-<<<<<<< HEAD
-				String provisorio;
-				provisorio = "alimento" + i;
-				
-				textField = new JTextField("0");
-				textField.setBounds(280, 54 + 30*i, 114, 19);
-				
-				//textField.setName(provisorio);
-				//System.out.println(provisorio);
-				panel.add(textField);
-				textField.setColumns(10);
-				
-				if(alimentos.get(i).getQuantidade() == 1){
-					textField.setToolTipText(Integer.toString(alimentos.get(i).getQuantidade()) + " alimento");
-				}
-				else{
-					textField.setToolTipText(Integer.toString(alimentos.get(i).getQuantidade()) + " alimentos");
-				}	
-			}
-		}
-		
-=======
 				
 				vetorAlimento[i] = new JTextField("0");
 				vetorAlimento[i].setBounds(280, 54 + 30*i, 114, 19);
@@ -204,9 +165,6 @@ public class GerenciarEstoque extends JFrame {
 		lblSucesso.setBounds(101, 61, 226, 99);
 		alert.add(lblSucesso);
 		
->>>>>>> develop
-		
-		
 		voltarTelaAnterior = new JButton("Voltar");
 		voltarTelaAnterior.setBounds(241, 216, 137, 25);
 		panel.add(voltarTelaAnterior);
@@ -218,14 +176,6 @@ public class GerenciarEstoque extends JFrame {
 		JLabel lblQuantidade = new JLabel("Quantidade");
 		lblQuantidade.setBounds(291, 27, 91, 15);
 		panel.add(lblQuantidade);
-		
-<<<<<<< HEAD
-		
-		
-		
-=======
-
->>>>>>> develop
 		
 		alert = new JPanel();
 		alert.setBounds(0, 0, 432, 253);
@@ -253,42 +203,6 @@ public class GerenciarEstoque extends JFrame {
 		
 		btnVoltar.setBounds(169, 155, 97, 25);
 		alert.add(btnVoltar);
-<<<<<<< HEAD
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//String alimento_bd;
-				for(int i=0; i<alimentos.size(); i++){
-					//alimento_bd = "alimento" + i;
-					
-					//alimentos.get(i).setQuantidade(Integer.valueOf(alimento1.getText()));
-					//maquina.setCinCent(Integer.valueOf(qtdeCinCent.getText()) + opMaq.getMaquina().getCinCent());
-				}
-				/* substituir por métodos equivalentes para esta classe */
-				/*MaquinaDAO maquinaDAO = new MaquinaDAO();
-				maquina.setCinCent(Integer.valueOf(qtdeCinCent.getText()) + opMaq.getMaquina().getCinCent());
-				maquina.setUmReal(Integer.valueOf(qtdeUmReal.getText()) + opMaq.getMaquina().getUmReal());
-				maquina.setDoisReal(Integer.valueOf(qtdeDoisReal.getText()) + opMaq.getMaquina().getDoisReal());
-				maquina.setCincoReal(Integer.valueOf(qtdeCinReal.getText()) + opMaq.getMaquina().getCincoReal());
-				maquina.setDezReal(Integer.valueOf(qtdeDezReal.getText()) + opMaq.getMaquina().getDezReal());
-				maquina.setDinheiroVendas(opMaq.getMaquina().getDinheiroVendas());
-				
-				
-				maquina.setId(opMaq.getMaquina().getId());
-				System.out.println("50 cent. "+maquina.getCinCent()+" 1 real "+maquina.getUmReal()+" 2 reais "+maquina.getDoisReal()
-				+" 5 reais "+maquina.getCincoReal()+" 10 reais "+maquina.getDezReal() + " id " + opMaq.getMaquina().getId()
-				+ " dinheiro vendas " + opMaq.getMaquina().getDinheiroVendas());
-				//atualiza a maquina no objeto OperadorMaquina
-				GerenciarEstoque.this.operadorMaquina.setMaquina(maquina);
-				
-				//DESCOMENTAR LINHA ABAIXO PARA ATUALIZACAO NO BANCO
-				maquinaDAO.updateMaquina(maquina);
-				panel.setVisible(false);
-				alert.setVisible(true);*/
-			}
-		});
-=======
-		
->>>>>>> develop
 		
 		voltarTelaAnterior.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){

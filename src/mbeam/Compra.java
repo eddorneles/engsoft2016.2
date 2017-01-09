@@ -8,12 +8,8 @@ import dominio.Maquina;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.joda.time.DateTime;
 
-<<<<<<< HEAD
-=======
 import def.ResultadoCompra;
->>>>>>> develop
 import def.TipoDinheiro;
 
 public class Compra {
